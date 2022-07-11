@@ -1,19 +1,19 @@
 export const login = () => {
   const viewLogin = `
-    <section class="logo">
+    <section class="logo flex">
       <img class="logo-img" src="pictures/paw.png">
       <p class="logo-text">PawProtection</p>
     </section>
   
-    <section class="login">
-      <form class="login-form-group">
-        <input type="text" class="login-email" placeholder="Correo">
-        <input type="text" class="login-password" placeholder="Contraseña">
-        <button class="login-btnLogin"><a href="#/wall">Iniciar Sesión</a></button>
+    <section class="login flex">
+      <form class="login-form-group flex">
+        <input type="text" class="login-email input-paw" placeholder="Correo">
+        <input type="password" class="login-password input-paw" placeholder="Contraseña">
+        <button class="login-btnLogin btn-paw"><a href="#/wall">Iniciar Sesión</a></button>
       </form>
       <p class="login-text">O bien ingresa con</p>
-      <picture class="login-google-img"></picture>
-      <p class="login-signup">¿No tienes cuenta?<a href="#/signup"><strong>Regístrate</strong></a></p>
+      <img class="login-google-img" src="pictures/google.png">
+      <p class="login-signup-text">¿No tienes cuenta?<a href="#/signup"><strong class="login-signup-btn"> Regístrate.</strong></a></p>
     </section>
   `;
 

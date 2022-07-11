@@ -1,35 +1,34 @@
 export const wall = () => {
   const viewWall = `
-    <header>
-      <section class="logo">
-      <img class="logo-img" src="pictures/paw.png">
+    <header class="header-wall flex-wall">
+      <section class="logo-wall flex-wall">
+        <img class="logo-img logo-img-wall" src="pictures/paw.png">
         <p class="logo-text">PawProtection</p>
       </section>
-
-      <a href="#/login">Salir</a>
+      <a href="#/login" class="btn-exit">Salir</a>
     </header>
 
     <section class="user">
       <img class="user-img" src="pictures/user.png">
-      <p class="user-text">Hola, <p class="user-name"></p></p>
+      <p class="user-text">¡Hola, Guillermo Morgado!</p>
     </section>
 
-    <section class="post">
-      <textarea name="textarea" rows="10" cols="50" class="post-editableText">Write something here</textarea>
-      <button class="post-btnpost"></button>
+    <section class="post flex">
+      <textarea name="textarea" class="post-editableText" rows="4" cols="10" placeholder="Cuéntanos..."></textarea>
+      <img class="post-btnpost" src="pictures/send.png">
     </section>
 
-    <section class="published-posts">
+    <section class="published-posts flex">
       <div class="published-posts-first">
-       <div class="published-posts-box"></div>
-       <select class="published-posts-btn">
-        <option value="edit">Editar</option>
-        <option value="delete">Eliminar</option>
-       </select>
+        <div class="published-posts-box"></div>
+        <!--<select class="published-posts-btn">
+          <option value="edit">Editar</option>
+          <option value="delete">Eliminar</option>
+        </select>-->
       </div>
-      <div class="published-posts-likes">
-        <picture class="published-posts-likes-img"></picture>
-        <p class="published-posts-likes-number"></p>
+      <div class="published-posts-likes flex-wall">
+        <img class="published-posts-likes-img" src="pictures/heart.png">
+        <p class="published-posts-likes-number">30</p>
       </div>
     </section>
   `;
