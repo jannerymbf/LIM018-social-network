@@ -1,3 +1,5 @@
+import { registerUser } from '../index.js';
+
 export const signup = () => {
   const viewSignup = `
     <section class="logo flex">
@@ -7,11 +9,11 @@ export const signup = () => {
 
     <section class="signup">
       <form class="signup-form-group flex">
-        <input type="text" class="signup-name input-paw" placeholder="Nombre">
-        <input type="text" class="signup-lastName input-paw" placeholder="Apellidos">
-        <input type="text" class="signup-email input-paw" placeholder="Correo">
-        <input type="text" class="signup-password input-paw" placeholder="Contraseña">
-        <button class="signup-btnSignup btn-paw"><a href="#/login">Registrar</a></button>
+        <input type="text" class="signup-name input-paw" placeholder="Nombre" required>
+        <input type="text" class="signup-lastName input-paw" placeholder="Apellidos" required>
+        <input id="emailSignup" type="email" class="signup-email input-paw" placeholder="Correo" required>
+        <input id="passSignup" type="text" class="signup-password input-paw" placeholder="Contraseña" required>
+        <button id="btnSignup" class="signup-btnSignup btn-paw"><a href="#/login">Registrar</a></button>
       </form>
       <p class="signup-login-text">¿Ya tienes cuenta?<a href="#/login"><strong class="login-signup-btn"> Inicia sesión.</strong></a></p>
     </section>
@@ -21,5 +23,11 @@ export const signup = () => {
   containerSignup.innerHTML = viewSignup;
   containerSignup.className = 'view-signup';
 
+  const btnSignup = containerSignup.querySelector('.signup-btnSignup');
+  const email = containerSignup.querySelector('.signup-email');
+  const password = containerSignup.querySelector('.signup-password');
+  btnSignup.addEventListener('click', () => {
+    registerUser(email.value, password.value);
+  });
   return containerSignup;
 };
