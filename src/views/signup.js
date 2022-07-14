@@ -26,8 +26,10 @@ export const signup = () => {
   const btnSignup = containerSignup.querySelector('.signup-btnSignup');
   const email = containerSignup.querySelector('.signup-email');
   const password = containerSignup.querySelector('.signup-password');
+  const name = containerSignup.querySelector('.signup-name');
+  const lastName = containerSignup.querySelector('.signup-lastName');
   btnSignup.addEventListener('click', () => {
-    registerUser(email.value, password.value);
+    registerUser(name.value, lastName.value, email.value, password.value);
   });
   return containerSignup;
 };
