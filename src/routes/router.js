@@ -25,6 +25,9 @@ const showViews = (hash) => {
       containerRoot.appendChild(wall());
       break;
     default:
-      containerRoot.innerHTML = '<h2>Esta página no existe</h2>';
+      containerRoot.innerHTML = `
+      <h1 style="font-size: 40px">404</h1>
+      <h2>Esta página no existe.</h2>
+      `;
   }
 };

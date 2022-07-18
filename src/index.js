@@ -39,6 +39,7 @@ export const registerUser = (name, lastName, email, password) => {
         });
       console.log(user);
       // termina
+      changeRoute('#/login');
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -64,7 +65,7 @@ export const loginUser = (email, password) => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert("Usuario y/o contraseña incorrectos");
+      alert('Usuario y/o contraseña incorrectos');
     });
 };
 

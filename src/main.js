@@ -4,11 +4,11 @@ import { changeRoute } from './routes/router.js';
 
 const init = () => {
   // window.location.host = document.getElementById('root').appendChild(login());
-  changeRoute(window.location.hash);
   window.addEventListener('hashchange', () => {
     // document.getElementById('root').appendChild(login()); //sería en caso si tuvieramos navbar
     changeRoute(window.location.hash);
   });
+  changeRoute(window.location.hash);
 };
 
 window.addEventListener('load', init());

@@ -80,6 +80,16 @@ body{
   outline-color: var(--blue-Paw);
 }
 
+.login-errortext, .signup-errortext{
+  color: red;
+  font-size: 0.7rem;
+  width: 15rem;
+}
+
+.errorInput{
+  border: 1px solid red;
+}
+
 .login-btnLogin, .signup-btnSignup{
   margin: 0.6rem 0rem;
 }
@@ -188,6 +198,32 @@ a{
 
 .published-posts-likes-number{
   margin: 0rem 0.5rem;
+}
+
+.signup-modal{
+  width: 246px;
+  height: 280px;
+  background: #93D152;
+  font-family: "Poppins";
+  font-size: 16px;
+  color: white
+}
+
+.check-out{
+  margin: 5px;
+  width: 40px;
+}
+/* modal*/
+.signup-closeModal{
+  border-radius: 50px;
+  border: none;
+  background-color: #02BDCB;
+  width: 11rem;
+  height: 2.2rem;
+  font-family: "Poppins";
+  font-size: 16px;
+  color:white;
+ 
 }
 
 
