@@ -39,13 +39,13 @@ export const registerUser = (name, lastName, email, password) => {
         });
       console.log(user);
       // termina
-      changeRoute('#/login');
+      // changeRoute('#/login');
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorMessage);// eslint-disable-next-line no-alert
-      alert(errorCode, errorMessage);
+      alert('Los datos ingresados no son válidos.');
     });
 };
 
@@ -59,13 +59,13 @@ export const loginUser = (email, password) => {
       if (user.emailVerified) {
         changeRoute('#/wall');
       } else {
-        alert('Primero verifica email');
+        alert('Aún no has verificado tu correo electrónico.');
       }
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert('Usuario y/o contraseña incorrectos');
+      alert('Usuario y/o contraseña incorrectos.');
     });
 };
 

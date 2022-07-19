@@ -1,6 +1,7 @@
 :root{
   --green-Paw: #93D152;
   --blue-Paw: #02BDCB;
+  --lightblue-Paw: #04CFDE;
   --yellow-Paw: #FFED4F;
   --orange-Paw: #FCC116;
   --darkorange-Paw: #F9B900; /*Pendiente */
@@ -99,7 +100,7 @@ a{
   color: white;
 }
 
-.btn-paw{
+.btn-paw, .signup-closeModal{
   border-radius: 50px;
   border: none;
   background-color: var(--orange-Paw);
@@ -107,11 +108,12 @@ a{
   height: 2.2rem;
   
   font-family: "Poppins";
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .btn-paw:hover{
-  background-color: var(--darkorange-Paw)
+  background-color: var(--darkorange-Paw);
+  cursor: pointer;
 }
 
 .login-signup-btn, .btn-exit{
@@ -200,30 +202,44 @@ a{
   margin: 0rem 0.5rem;
 }
 
+/*Estilo para modal*/
+
 .signup-modal{
   width: 246px;
-  height: 280px;
-  background: #93D152;
-  font-family: "Poppins";
-  font-size: 16px;
-  color: white
+  height: 230px;
+  background: var(--green-Paw);
+  border-radius: 20px;
+  border: none;
+  font-size: 1rem;
+  color: white;
 }
 
-.check-out{
-  margin: 5px;
-  width: 40px;
+.signup-modal::backdrop{
+  background: rgba(217, 217, 217, 0.56);
 }
-/* modal*/
+
+.modal-text1{
+  font-weight: 600;
+}
+
+.modal-text1, .modal-text2{
+  margin: 5px 5px;
+}
+
+/* .check-out{
+  width: 40px;
+} */
+/* boton para cerrar*/
 .signup-closeModal{
-  border-radius: 50px;
-  border: none;
-  background-color: #02BDCB;
-  width: 11rem;
-  height: 2.2rem;
-  font-family: "Poppins";
-  font-size: 16px;
-  color:white;
- 
+  margin: 5px 0px;
+  background-color: var(--blue-Paw);
+  color: white;
+  width: 100px;
+}
+
+.signup-closeModal:hover{
+  background-color: var(--lightblue-Paw);
+  cursor: pointer;
 }
 
 

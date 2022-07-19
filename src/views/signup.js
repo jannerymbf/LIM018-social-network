@@ -1,5 +1,5 @@
 import { registerUser } from '../index.js';
-// import { changeRoute } from '../routes/router.js';
+import { changeRoute } from '../routes/router.js';
 
 export const signup = () => {
   const viewSignup = `
@@ -17,9 +17,9 @@ export const signup = () => {
         <div class="signup-errortext"></div>
         <button id="btnSignup" class="signup-btnSignup btn-paw"><a>Registrar</a></button>
         <dialog id="signup-modal" class="signup-modal">
-          <img class="check-out" src="pictures/chek-list.png"></img>
-          <h2>¡Usuario registrado con éxito!</h2>
-          <p>Revise su correo electronico para iniciar sesión</p>
+          <img class="check-out" src="pictures/check.png"></img>
+          <p class="modal-text1">¡Usuario registrado <br>con éxito!</p>
+          <p class="modal-text2">Revise su correo electrónico para iniciar sesión.</p>
           <button class="signup-closeModal" id="btn-aceptar">Cerrar</button>
         </dialog>
       </form>
@@ -45,6 +45,9 @@ export const signup = () => {
     if (email.value !== '' || password.value !== '' || name.value !== '' || lastName.value !== '') {
       registerUser(name.value, lastName.value, email.value, password.value);
       modal.showModal();
+      // btnCloseModal.addEventListener('click', () => {
+      //   modal.close();
+      // });
     } else {
       errorText.innerHTML = 'Los datos ingresados no son válidos.';
       name.classList.add('errorInput');
@@ -53,7 +56,8 @@ export const signup = () => {
       password.classList.add('errorInput');
     }
     btnCloseModal.addEventListener('click', () => {
-      modal.closeModal();
+      modal.close();
+      changeRoute('#/login');
     });
   });
   return containerSignup;
