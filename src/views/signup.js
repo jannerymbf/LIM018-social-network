@@ -44,10 +44,17 @@ export const signup = () => {
     e.preventDefault();
     if (email.value !== '' || password.value !== '' || name.value !== '' || lastName.value !== '') {
       registerUser(name.value, lastName.value, email.value, password.value);
-      modal.showModal();
       // btnCloseModal.addEventListener('click', () => {
       //   modal.close();
       // });
+      if (registerUser !== true) {
+        errorText.innerHTML = 'Los datos ingresados no son válidos.';
+        name.classList.add('errorInput');
+        lastName.classList.add('errorInput');
+        email.classList.add('errorInput');
+        password.classList.add('errorInput');
+      }
+      modal.showModal();
     } else {
       errorText.innerHTML = 'Los datos ingresados no son válidos.';
       name.classList.add('errorInput');

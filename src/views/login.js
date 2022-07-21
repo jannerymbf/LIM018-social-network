@@ -1,4 +1,5 @@
 import { loginUser } from '../index.js';
+import { registerGoogle } from '../index.js';
 import { changeRoute } from '../routes/router.js';
 
 export const login = () => {
@@ -20,7 +21,7 @@ export const login = () => {
       <p class="login-signup-text">¿No tienes cuenta?<a href="#/signup"><strong class="login-signup-btn"> Regístrate.</strong></a></p>
     </section>
   `;
-
+  // console.log('Hola!!');
   const containerLogin = document.createElement('div');
   containerLogin.innerHTML = viewLogin;
   containerLogin.className = 'view-login';
@@ -29,33 +30,28 @@ export const login = () => {
   const email = containerLogin.querySelector('.login-email');
   const password = containerLogin.querySelector('.login-password');
   const errorText = containerLogin.querySelector('.login-errortext');
+  const btnGoogle = containerLogin.querySelector('.login-google-img');
 
-  btnLogin.addEventListener('click', () => {
+  btnLogin.addEventListener('click', (e) => {
+    e.preventDefault(); // Previene el comportamiento por defecto de la etiqueta <form>
     if (email.value !== '' || password.value !== '') {
       loginUser(email.value, password.value);
-        /*.then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          // ...
-          console.log(user);
-          if (user.emailVerified) {
-            changeRoute('#/wall');
-          } else {
-            errorText.innerHTML = 'No olvides verificar tu email.';
-            console.log(errorText);
-          }
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          errorText.innerHTML = 'El correo y/o contraseña ingresados no están conectados a ninguna cuenta.';
-        });*/
+      if (loginUser !== true) {
+        // Hay un problema: aparece mensaje cuando el correo está verificado
+        errorText.innerHTML = 'El correo y/o contraseña ingresados no están conectados a ninguna cuenta.';
+        email.classList.add('errorInput');
+        password.classList.add('errorInput');
+      }
     } else {
       // btnLoginref.setAttribute('href', '#/login');
       errorText.innerHTML = 'El correo y/o contraseña ingresados no están conectados a ninguna cuenta.';
       email.classList.add('errorInput');
       password.classList.add('errorInput');
     }
+  });
+
+  btnGoogle.addEventListener('click', () => {
+    registerGoogle();
   });
 
   return containerLogin;
