@@ -36,12 +36,6 @@ export const login = () => {
     e.preventDefault(); // Previene el comportamiento por defecto de la etiqueta <form>
     if (email.value !== '' || password.value !== '') {
       loginUser(email.value, password.value);
-      if (loginUser !== true) {
-        // Hay un problema: aparece mensaje cuando el correo está verificado
-        errorText.innerHTML = 'El correo y/o contraseña ingresados no están conectados a ninguna cuenta.';
-        email.classList.add('errorInput');
-        password.classList.add('errorInput');
-      }
     } else {
       // btnLoginref.setAttribute('href', '#/login');
       errorText.innerHTML = 'El correo y/o contraseña ingresados no están conectados a ninguna cuenta.';

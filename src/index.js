@@ -12,9 +12,10 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   provider,
-  getDoc,
-  docRef,
-  docSnap,
+  collection,
+  getDocs,
+  querySnapshot,
+  onAuthStateChanged,
 } from './firebase.js';
 // eslint-disable-next-line import/no-unresolved
 export const registerUser = (name, lastName, email, password) => {
@@ -39,21 +40,20 @@ export const registerUser = (name, lastName, email, password) => {
         Password: password,
       });
       // Si el usuario verifico mail puede ingresar al wall
-      sendEmailVerification(auth.currentUser)
-        .then(() => {
-          console.log('enviando correo');
-        });
+      // (estará comentado porque no tenemos muchos correos reales)
+      // sendEmailVerification(auth.currentUser)
+      //   .then(() => {
+      //     console.log('enviando correo');
+      //   });
       console.log(user);
       // termina
       // changeRoute('#/login');
-      return true;
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorMessage);// eslint-disable-next-line no-alert
       alert('Los datos ingresados no son válidos.');
-      return false;
     });
 };
 
@@ -62,16 +62,15 @@ export const loginUser = (email, password) => {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      if (user.emailVerified) {
-        changeRoute('#/wall');
-        return true;
-      }
+      changeRoute('#/wall');
+      // if (user.emailVerified) {
+      //   changeRoute('#/wall');
+      // }
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      // alert('Usuario y/o contraseña incorrectos.');
-      return false;
+      alert('Usuario y/o contraseña incorrectos.');
     });
 };
 
@@ -101,28 +100,29 @@ export const registerGoogle = () => {
     // ...
     });
 };
-// const observer = () => {
-//   onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//       const uid = user.uid;
-//       console.log('Usuario activo');
-//       changeRoute('#/wall');
-//       // ...
-//     } else {
-//       // User is signed out
-//       console.log('No existe usuario activo');
-//     }
-//   });
-// };
+
+const observer = () => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const uid = user.uid;
+      console.log('Usuario activo');
+      changeRoute('#/wall');
+      // ...
+    } else {
+      // User is signed out
+      console.log('No existe usuario activo');
+    }
+  });
+};
 
 // observer();
 
 // funcion que me retorne el nombre para jalarlo en el wall
 export const getName = () => {
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-  } else {
-    // doc.data() will be undefined in this case
-    console.log("No such document!");
-  }
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.data().Name);
+  });
 };
+
+getName();

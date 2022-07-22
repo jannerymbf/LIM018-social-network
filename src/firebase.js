@@ -1,7 +1,14 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js';
 // import { getFirestore, doc, setDoc, collection, addDoc } from 'https://www.gstatic.com/firebasejs/9.9.0/firebase-firestore.js';
 // eslint-disable-next-line import/no-unresolved
-import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/9.9.0/firebase-firestore.js';
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  // getDoc,
+  collection,
+  getDocs,
+} from 'https://www.gstatic.com/firebasejs/9.9.0/firebase-firestore.js';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -35,8 +42,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
 const provider = new GoogleAuthProvider(); // para Google
-const docRef = doc(db, "cities", "SF");
-const docSnap = await getDoc(docRef);
+// const docRef = doc(db, 'users', userCredential.user.uid);
+// const docSnap = await getDoc(docRef);
+const querySnapshot = await getDocs(collection(db, 'users'));
 
 export {
   doc,
@@ -50,7 +58,11 @@ export {
   GoogleAuthProvider,
   signInWithPopup,
   provider,
-  getDoc,
-  docRef,
-  docSnap,
+  // getDoc,
+  // docRef,
+  // docSnap,
+  collection,
+  getDocs,
+  querySnapshot,
+  onAuthStateChanged,
 };

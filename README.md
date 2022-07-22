@@ -1,4 +1,4 @@
-# Creando una Red Social con Rubis y Jannery 
+# Creando una Red Social
 
 ## Índice
 
