@@ -1,3 +1,6 @@
+import { exit, observer } from '../index.js';
+import { auth, querySnapshot } from '../firebase.js';
+
 export const wall = () => {
   const viewWall = `
     <header class="header-wall flex-wall">
@@ -5,7 +8,7 @@ export const wall = () => {
         <img class="logo-img logo-img-wall" src="pictures/paw.png">
         <p class="logo-text">PawProtection</p>
       </section>
-      <a href="#/login" class="btn-exit">Salir</a>
+      <a class="btn-exit">Salir</a>
     </header>
 
     <section class="user">
@@ -33,9 +36,28 @@ export const wall = () => {
     </section>
   `;
 
+  observer();
   const containerWall = document.createElement('div');
   containerWall.innerHTML = viewWall;
   containerWall.className = 'view-wall';
+
+  const btnSignOut = containerWall.querySelector('.btn-exit');
+  const greeting = containerWall.querySelector('.user-text');
+
+  // greeting.innerHTML = `¡Hola, ${auth.currentUser.displayName}!`;
+  // greeting.innerHTML = `¡Hola, ${localStorage.getItem('nameUser')}!`;
+  console.log(auth.currentUser);
+  btnSignOut.addEventListener('click', () => {
+    exit();
+  });
+
+  const prueba = () => {
+    querySnapshot.forEach((doc) => {
+      greeting.innerHTML = `¡Hola, ${doc.data().Name}!`;
+      console.log(`${doc.id} => ${doc.data().Name}`);
+    });
+  };
+  prueba();
 
   return containerWall;
 };

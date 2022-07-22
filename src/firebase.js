@@ -5,7 +5,7 @@ import {
   getFirestore,
   doc,
   setDoc,
-  // getDoc,
+  getDoc,
   collection,
   getDocs,
 } from 'https://www.gstatic.com/firebasejs/9.9.0/firebase-firestore.js';
@@ -17,6 +17,7 @@ import {
   sendEmailVerification,
   GoogleAuthProvider,
   signInWithPopup,
+  signOut,
 } from 'https://www.gstatic.com/firebasejs/9.9.0/firebase-auth.js';
 
 // Your web app's Firebase configuration
@@ -45,6 +46,7 @@ const provider = new GoogleAuthProvider(); // para Google
 // const docRef = doc(db, 'users', userCredential.user.uid);
 // const docSnap = await getDoc(docRef);
 const querySnapshot = await getDocs(collection(db, 'users'));
+//const user = auth.currentUser;
 
 export {
   doc,
@@ -58,11 +60,12 @@ export {
   GoogleAuthProvider,
   signInWithPopup,
   provider,
-  // getDoc,
+  getDoc,
   // docRef,
   // docSnap,
   collection,
   getDocs,
   querySnapshot,
-  onAuthStateChanged,
+  signOut,
+  //user,
 };

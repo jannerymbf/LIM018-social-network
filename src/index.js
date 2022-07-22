@@ -15,7 +15,10 @@ import {
   collection,
   getDocs,
   querySnapshot,
+  getDoc,
   onAuthStateChanged,
+  signOut,
+  //user,
 } from './firebase.js';
 // eslint-disable-next-line import/no-unresolved
 export const registerUser = (name, lastName, email, password) => {
@@ -48,12 +51,14 @@ export const registerUser = (name, lastName, email, password) => {
       console.log(user);
       // termina
       // changeRoute('#/login');
+      // return user;
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorMessage);// eslint-disable-next-line no-alert
       alert('Los datos ingresados no son válidos.');
+      // return error;
     });
 };
 
@@ -101,28 +106,81 @@ export const registerGoogle = () => {
     });
 };
 
-const observer = () => {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      console.log('Usuario activo');
-      changeRoute('#/wall');
+// export const getNameGoogle = () => {
+//   if (user !== null) {
+//     user.providerData.forEach((profile) => {
+//       console.log('  Name: ' + profile.displayName);
+//     });
+//   }
+// };
+// getNameGoogle();
+
+export const observer = () => {
+  onAuthStateChanged(auth, (activeUser) => {
+    if (activeUser) {
+      // console.log(user);
+      const uid = activeUser.uid;
+      console.log('Usuario activo', uid);
+
+      // **jalando nombre de firestore
+      const docRef = doc(db, 'users', uid);
+      const docSnap = getDoc(docRef);
+      docSnap
+        .then((result) => {
+          const nameUser = result.data().Name;
+          console.log(nameUser);
+          localStorage.setItem('nameUser', nameUser);
+          //printTitle();
+        })
+        .catch((err) => {
+          console.log(err);
+          //return err;
+        });
+      // ** acaá termina
+
+      // if (docSnap.exists()) {
+      //   console.log('Document data:', docSnap.data());
+      // } else {
+      //   // doc.data() will be undefined in this case
+      //   console.log('No such document!');
+      // }
       // ...
     } else {
       // User is signed out
       console.log('No existe usuario activo');
     }
+    // console.log(user);
   });
 };
 
-// observer();
+export const exit = () => {
+  signOut(auth).then(() => {
+    changeRoute('#/login');
+  }).catch((error) => {
+    console.log(error);
+  });
+};
+
+// console.log(observer());
 
 // funcion que me retorne el nombre para jalarlo en el wall
-export const getName = () => {
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    console.log(doc.data().Name);
-  });
-};
+// export const getName = () => {
+//   querySnapshot.forEach((doc) => {
+//     // doc.data() is never undefined for query doc snapshots
+//     console.log(doc.data().Name);
+//   });
+// };
+// getName();
 
-getName();
+// que el authchange me retorne el id del usuario activo
+// que getName me retorne el nombre de ese usuario activo
+
+// const docRef = doc(db, 'users', observer());
+// const docSnap = await getDoc(docRef);
+
+// if (docSnap.exists()) {
+//   console.log("Document data:", docSnap.data());
+// } else {
+//   // doc.data() will be undefined in this case
+//   console.log("No such document!");
+// }
