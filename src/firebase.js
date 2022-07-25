@@ -8,6 +8,7 @@ import {
   getDoc,
   collection,
   getDocs,
+  addDoc
 } from 'https://www.gstatic.com/firebasejs/9.9.0/firebase-firestore.js';
 import {
   getAuth,
@@ -18,6 +19,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from 'https://www.gstatic.com/firebasejs/9.9.0/firebase-auth.js';
 
 // Your web app's Firebase configuration
@@ -68,4 +70,6 @@ export {
   querySnapshot,
   signOut,
   //user,
+  updateProfile,
+  addDoc
 };

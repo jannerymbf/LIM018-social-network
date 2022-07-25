@@ -1,5 +1,5 @@
-import { exit, observer } from '../index.js';
-import { auth, querySnapshot } from '../firebase.js';
+import { exit, saveComment } from '../index.js';
+import { auth, collection, db, getDocs } from '../firebase.js';
 
 export const wall = () => {
   const viewWall = `
@@ -22,42 +22,89 @@ export const wall = () => {
     </section>
 
     <section class="published-posts flex">
-      <div class="published-posts-first">
-        <div class="published-posts-box"></div>
-        <!--<select class="published-posts-btn">
-          <option value="edit">Editar</option>
-          <option value="delete">Eliminar</option>
-        </select>-->
+      <div class="published-posts-container">
+        <!--<div class="published-posts-box"></div>
+              <select class="published-posts-btn">
+                <option value="edit">Editar</option>
+                <option value="delete">Eliminar</option>
+              </select>-->
       </div>
-      <div class="published-posts-likes flex-wall">
+      <!--<div class="published-posts-likes flex-wall">
         <img class="published-posts-likes-img" src="pictures/heart.png">
         <p class="published-posts-likes-number">30</p>
-      </div>
+      </div>-->
     </section>
   `;
 
-  observer();
+  //observer();
   const containerWall = document.createElement('div');
   containerWall.innerHTML = viewWall;
   containerWall.className = 'view-wall';
 
   const btnSignOut = containerWall.querySelector('.btn-exit');
   const greeting = containerWall.querySelector('.user-text');
+  const commentPost = containerWall.querySelector('.post-editableText');
+  const btnPostComment = containerWall.querySelector('.post-btnpost');
+  const publishedPostsContainer = containerWall.querySelector('.published-posts-container');
 
-  // greeting.innerHTML = `¡Hola, ${auth.currentUser.displayName}!`;
+  greeting.innerHTML = `¡Hola, ${auth.currentUser.displayName}!`;
   // greeting.innerHTML = `¡Hola, ${localStorage.getItem('nameUser')}!`;
-  console.log(auth.currentUser);
+  // console.log(auth.currentUser.email);
+  // getName();
+  function increaseLikes() {
+    let counter = 0;
+    counter++;
+    return counter;
+  }
+
+  function createDivs(post) {
+    const containerPost = document.createElement('div');
+    const containerLikes = document.createElement('div');
+    const imgLikes = document.createElement('img');
+    const countLikes = document.createElement('p');
+    containerPost.innerHTML = post;
+    publishedPostsContainer.appendChild(containerPost);
+    // para los likes
+    imgLikes.setAttribute('src', 'pictures/heart.png');
+    imgLikes.setAttribute('class', 'published-posts-likes-img');
+    containerLikes.setAttribute('class', 'containerLikes');
+    countLikes.setAttribute('class', 'published-posts-likes-number');
+    containerLikes.appendChild(imgLikes);
+    containerLikes.appendChild(countLikes);
+    publishedPostsContainer.appendChild(containerLikes);
+    imgLikes.addEventListener('click', () => {
+      countLikes.innerHTML = increaseLikes();
+      // dar y quitar likes usar toggle?
+    });
+  }
+
+  function firstLoad() {
+    const colRef = collection(db, 'comments');
+    let posts = [];
+    getDocs(colRef)
+      .then((onSnapshot) => {
+        onSnapshot.docs.forEach((document) => {
+          //posts.push({ ...doc.data(), id: doc.id });
+          posts.push({ name: document.data().name, post: document.data().comment });
+          createDivs(document.data().comment);
+        });
+      });
+  }
+
+  firstLoad();
+
+  btnPostComment.addEventListener('click', () => {
+    if (commentPost.value !== '') {
+      createDivs(commentPost.value);
+      saveComment(commentPost.value, auth.currentUser.displayName);
+
+      commentPost.value = '';
+    }
+  });
+
   btnSignOut.addEventListener('click', () => {
     exit();
   });
-
-  const prueba = () => {
-    querySnapshot.forEach((doc) => {
-      greeting.innerHTML = `¡Hola, ${doc.data().Name}!`;
-      console.log(`${doc.id} => ${doc.data().Name}`);
-    });
-  };
-  prueba();
 
   return containerWall;
 };

@@ -171,7 +171,7 @@ a{
   margin: 1rem;
 }
 
-.post-editableText, .published-posts-box{
+.post-editableText, .published-posts-container div:nth-child(odd){
   width: 70%;
   height: 30%;
   border-radius: 20px;
@@ -179,23 +179,33 @@ a{
   font-size: 1rem;
 }
 
+.published-posts-container{
+  align-self: normal;
+}
+
 .post-btnpost{
   align-self: flex-end;
   margin-right: 15%;
 }
 
-.published-posts-box{
+.published-posts-container div:nth-child(odd){
   /* Por mientras */
-  width: 270px;
+  width: initial;
   height: 100px;
-  background-color: var(--gray-Paw);
-  margin: 15px;
+  background-color: var(--green-Paw);
+  margin: 5% 12%;
+}
+
+.containerLikes{
+  align-self: flex-start;
+  justify-self: baseline;
+  margin-left: 15%;
 }
 
 .published-posts-likes{
   align-self: flex-start;
   justify-self: baseline;
-  margin-left: 15%;
+  /* margin-left: 15%; */
 }
 
 .published-posts-likes-number{

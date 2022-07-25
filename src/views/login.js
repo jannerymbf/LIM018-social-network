@@ -35,7 +35,12 @@ export const login = () => {
   btnLogin.addEventListener('click', (e) => {
     e.preventDefault(); // Previene el comportamiento por defecto de la etiqueta <form>
     if (email.value !== '' || password.value !== '') {
-      loginUser(email.value, password.value);
+      loginUser(email.value, password.value)
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          errorText.innerHTML = 'El correo y/o contraseña ingresados no están conectados a ninguna cuenta.';
+        });
     } else {
       // btnLoginref.setAttribute('href', '#/login');
       errorText.innerHTML = 'El correo y/o contraseña ingresados no están conectados a ninguna cuenta.';
