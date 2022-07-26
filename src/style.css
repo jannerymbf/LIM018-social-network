@@ -120,8 +120,9 @@ a{
   color: var(--blue-Paw);
 }
 
-.login-signup-btn:hover{
-  border-bottom: 2px solid #02BDCB;
+.login-signup-btn:hover, .btn-exit:hover{
+  border-bottom: 2px solid var(--blue-Paw);
+  cursor: pointer;
 }
 
 .login-google-img{
@@ -171,7 +172,7 @@ a{
   margin: 1rem;
 }
 
-.post-editableText, .published-posts-container div:nth-child(odd){
+.post-editableText, .container-post{
   width: 70%;
   height: 30%;
   border-radius: 20px;
@@ -188,25 +189,40 @@ a{
   margin-right: 15%;
 }
 
-.published-posts-container div:nth-child(odd){
+.container-post{
   /* Por mientras */
   width: initial;
   height: 100px;
+  background-color: white;
+  border: 2px solid var(--green-Paw);
+  margin: 0% 12% 2% 12%;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.container-post-name{
+  width: 76%;
+  height: 30px;
   background-color: var(--green-Paw);
-  margin: 5% 12%;
+  color: white;
+    /* justify-self: center; */
+  margin-left: 12%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  margin-top: 30px;
+  padding-top: 7px;
 }
 
 .containerLikes{
-  align-self: flex-start;
-  justify-self: baseline;
+  display: flex;
   margin-left: 15%;
 }
 
-.published-posts-likes{
+/* .published-posts-likes{
   align-self: flex-start;
   justify-self: baseline;
-  /* margin-left: 15%; */
-}
+  /* margin-left: 15%; 
+} */
 
 .published-posts-likes-number{
   margin: 0rem 0.5rem;
