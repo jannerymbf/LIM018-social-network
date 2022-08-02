@@ -46,11 +46,13 @@ export const wall = () => {
   const commentPost = containerWall.querySelector('.post-editableText');
   const btnPostComment = containerWall.querySelector('.post-btnpost');
   const publishedPostsContainer = containerWall.querySelector('.published-posts-container');
+  const imageProfile = containerWall.querySelector('.user-img');
 
   let editStatus = false;
   let likeStatus = false;
 
   greeting.innerHTML = `¡Hola, ${auth.currentUser.displayName}!`;
+  imageProfile.src = auth.currentUser.photoURL;
   // greeting.innerHTML = `¡Hola, ${localStorage.getItem('nameUser')}!`;
   // console.log(auth.currentUser.email);
   // getName();

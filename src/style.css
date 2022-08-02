@@ -162,8 +162,11 @@ a{
 }
 
 .user-img{
-  height: 6rem;
-  width: 6rem;
+  /* height: 6rem;
+  width: 6rem; */
+  height: 7rem;
+  width: 7rem;
+  border-radius: 100px;
 }
 
 .user-text{
