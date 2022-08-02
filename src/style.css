@@ -198,6 +198,10 @@ a{
   margin: 0% 12% 2% 12%;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
+
+  font-family: 'Poppins';
+  width: 70%;
+  text-align: center;
 }
 
 .container-post-name{
@@ -226,6 +230,19 @@ a{
 
 .published-posts-likes-number{
   margin: 0rem 0.5rem;
+}
+
+.btn-edit-post, .btn-delete-post{
+  border-radius: 10px;
+  border: none;
+  background-color: var(--blue-Paw);
+  color: white;
+  font-family: 'Poppins';
+  margin-right: 10px;
+}
+
+.btn-delete-post{
+  background-color: var(--gray-Paw);
 }
 
 /*Estilo para modal*/

@@ -40,6 +40,8 @@ export const login = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           errorText.innerHTML = 'El correo y/o contraseña ingresados no están conectados a ninguna cuenta.';
+          email.classList.add('errorInput');
+          password.classList.add('errorInput');
         });
     } else {
       // btnLoginref.setAttribute('href', '#/login');

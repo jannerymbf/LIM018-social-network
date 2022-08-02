@@ -8,7 +8,9 @@ import {
   getDoc,
   collection,
   getDocs,
-  addDoc
+  addDoc,
+  updateDoc,
+  deleteDoc
 } from 'https://www.gstatic.com/firebasejs/9.9.0/firebase-firestore.js';
 import {
   getAuth,
@@ -71,5 +73,7 @@ export {
   signOut,
   //user,
   updateProfile,
-  addDoc
+  addDoc,
+  updateDoc,
+  deleteDoc
 };

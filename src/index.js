@@ -20,59 +20,52 @@ import {
   signOut,
   //user,
   updateProfile,
-  addDoc
+  addDoc,
+  updateDoc,
+  deleteDoc
 } from './firebase.js';
 // eslint-disable-next-line import/no-unresolved
-export const registerUser = (name, lastName, email, password) => {
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      // eslint-disable-next-line no-console
-      // console.log(user);
-      // Añadir datos al firestore con diferente ID
-      // addDoc(collection(db, 'users'), {
-      //   Name: name,
-      //   LastName: lastName,
-      //   Email: email,
-      //   Password: password,
-      // });
-      // Añadir datos al firestore con mismo ID
-      updateProfile(user, {
-        displayName: `${name} ${lastName}`,
-      }).then(() => {
-        // Profile updated!
-        // ...
-      }).catch((error) => {
-        // An error occurred
-        // ...
-      });
-      setDoc(doc(db, 'users', user.uid), {
-        Name: name,
-        LastName: lastName,
-        Email: email,
-        Password: password,
-      });
-
-      // Si el usuario verifico mail puede ingresar al wall
-      // (estará comentado porque no tenemos muchos correos reales)
-      // sendEmailVerification(auth.currentUser)
-      //   .then(() => {
-      //     console.log('enviando correo');
-      //   });
-      console.log(user);
-      // termina
-      // changeRoute('#/login');
-      // return user;
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorMessage);// eslint-disable-next-line no-alert
-      alert('Los datos ingresados no son válidos.');
-      // return error;
+export const registerUser = (name, lastName, email, password) => createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in
+    const user = userCredential.user;
+    // eslint-disable-next-line no-console
+    // console.log(user);
+    // Añadir datos al firestore con diferente ID
+    // addDoc(collection(db, 'users'), {
+    //   Name: name,
+    //   LastName: lastName,
+    //   Email: email,
+    //   Password: password,
+    // });
+    // Añadir datos al firestore con mismo ID
+    updateProfile(user, {
+      displayName: `${name} ${lastName}`,
+    }).then(() => {
+      // Profile updated!
+      // ...
+    }).catch((error) => {
+      // An error occurred
+      // ...
     });
-};
+    setDoc(doc(db, 'users', user.uid), {
+      Name: name,
+      LastName: lastName,
+      Email: email,
+      Password: password,
+    });
+
+    // Si el usuario verifico mail puede ingresar al wall
+    // (estará comentado porque no tenemos muchos correos reales)
+    // sendEmailVerification(auth.currentUser)
+    //   .then(() => {
+    //     console.log('enviando correo');
+    //   });
+    console.log(user);
+    // termina
+    // changeRoute('#/login');
+    // return user;
+  });
 
 export const loginUser = (email, password) => signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
@@ -111,10 +104,13 @@ export const registerGoogle = () => {
     });
 };
 
-export const saveComment = (comment, name) => {
-  const date = new Date();
-  addDoc(collection(db, 'comments'), { comment, name, date });
-};
+// export const saveComment = (comment, name) => {
+//   const date = new Date();
+//   addDoc(collection(db, 'comments'), { comment, name, date });
+
+// };
+
+export const saveComment = (comment, name) => addDoc(collection(db, 'comments'), { comment, name });
 
 // export const saveWall = () => {
 //   const colRef = collection(db, 'comments');
@@ -168,6 +164,12 @@ export const saveComment = (comment, name) => {
 //   });
 // };
 // ******termina observer
+
+// Funcion para editar datos
+export const updatePost = (id, newInput) => updateDoc(doc(db, 'comments', id), newInput);
+
+// Funcion para eliminar datos
+export const deletePost = (id) => deleteDoc(doc(db, 'comments', id));
 
 export const exit = () => {
   signOut(auth).then(() => {

@@ -1,4 +1,4 @@
-import { exit, saveComment } from '../index.js';
+import { exit, saveComment, deletePost, updatePost } from '../index.js';
 import { auth, collection, db, getDocs } from '../firebase.js';
 
 export const wall = () => {
@@ -47,49 +47,87 @@ export const wall = () => {
   const btnPostComment = containerWall.querySelector('.post-btnpost');
   const publishedPostsContainer = containerWall.querySelector('.published-posts-container');
 
+  let editStatus = false;
+  let likeStatus = false;
+
   greeting.innerHTML = `¡Hola, ${auth.currentUser.displayName}!`;
   // greeting.innerHTML = `¡Hola, ${localStorage.getItem('nameUser')}!`;
   // console.log(auth.currentUser.email);
   // getName();
-  function handlingLikes(active) {
-    let counter = 0;
-    if (active === true) {
-      counter++;
-    } else {
-      counter--;
-    }
-    return counter;
-  }
+  firstLoad();
 
-  function createDivs(post, name) {
+  function createDivs(post, name, idPost) {
+    const container = document.createElement('div');
     const containerName = document.createElement('div');
-    const containerPost = document.createElement('div');
+    const containerPost = document.createElement('textarea');
+    // Variables para likes
     const containerLikes = document.createElement('div');
     const imgLikes = document.createElement('img');
     const countLikes = document.createElement('p');
+    // Variables para editar
+    const btnEdit = document.createElement('button');
+    const btnEditText = document.createTextNode('Editar');
+    btnEdit.appendChild(btnEditText);
+    const btnDelete = document.createElement('button');
+    const btnDeleteText = document.createTextNode('Eliminar');
+    btnDelete.appendChild(btnDeleteText);
+
     containerName.innerHTML = name;
     containerPost.innerHTML = post;
-    // containerPost.appendChild(containerName);
-    publishedPostsContainer.appendChild(containerName);
-    publishedPostsContainer.appendChild(containerPost);
+    containerPost.appendChild(containerName);
+    container.appendChild(containerName);
+    container.appendChild(containerPost);
+    // publishedPostsContainer.appendChild(containerName);
+    // publishedPostsContainer.appendChild(containerPost);
     containerName.setAttribute('class', 'container-post-name');
     containerPost.setAttribute('class', 'container-post');
+    containerPost.setAttribute('disabled', true);
+    container.setAttribute('id', idPost);
     // para los likes
     imgLikes.setAttribute('src', 'pictures/heart.png');
     imgLikes.setAttribute('class', 'published-posts-likes-img');
     containerLikes.setAttribute('class', 'containerLikes');
     countLikes.setAttribute('class', 'published-posts-likes-number');
+    btnEdit.setAttribute('class', 'btn-edit-post');
+    btnEdit.setAttribute('data-id', idPost);
+    btnDelete.setAttribute('class', 'btn-delete-post');
+    btnDelete.setAttribute('data-id', idPost);
     containerLikes.appendChild(imgLikes);
     containerLikes.appendChild(countLikes);
-    publishedPostsContainer.appendChild(containerLikes);
+    containerLikes.appendChild(btnEdit);
+    containerLikes.appendChild(btnDelete);
+    // publishedPostsContainer.appendChild(containerLikes);
+    container.appendChild(containerLikes);
+    publishedPostsContainer.appendChild(container);
+
+    btnDelete.addEventListener('click', (event) => {
+      deletePost(event.target.dataset.id);
+      publishedPostsContainer.removeChild(container);
+    });
+
+    btnEdit.addEventListener('click', (e) => {
+      if (!editStatus) {
+        containerPost.disabled = false;
+        btnEdit.innerHTML = 'Actualizar';
+        editStatus = true;
+      } else {
+        updatePost(e.target.dataset.id, { comment: containerPost.value });
+        containerPost.disabled = true;
+        btnEdit.innerHTML = 'Editar';
+        editStatus = false;
+      }
+    });
+
     imgLikes.addEventListener('click', () => {
-      imgLikes.id = 'on';
-      if (imgLikes.id === 'on') {
-        countLikes.innerHTML = handlingLikes(true);
-        imgLikes.id = 'off';
-      } else if (imgLikes.id === 'off') {
-        countLikes.innerHTML = handlingLikes(false);
-        imgLikes.id = 'on';
+      let counter = 0;
+      if (!likeStatus) {
+        counter++;
+        countLikes.innerHTML = counter;
+        likeStatus = true;
+      } else {
+        counter--;
+        countLikes.innerHTML = counter;
+        likeStatus = false;
       }
       // dar y quitar likes usar toggle?
       // countLikes.toggleAttribute(countLikes);
@@ -102,21 +140,23 @@ export const wall = () => {
     getDocs(colRef)
       .then((onSnapshot) => {
         onSnapshot.docs.forEach((document) => {
-          //posts.push({ ...doc.data(), id: doc.id });
+          // posts.push({ ...doc.data(), id: doc.id });
           posts.push({ name: document.data().name, post: document.data().comment });
-          createDivs(document.data().comment, document.data().name);
+          createDivs(document.data().comment, document.data().name, document.id);
         });
       });
   }
 
-  firstLoad();
-
   btnPostComment.addEventListener('click', () => {
     if (commentPost.value !== '') {
-      createDivs(commentPost.value, auth.currentUser.displayName);
-      saveComment(commentPost.value, auth.currentUser.displayName);
-
-      commentPost.value = '';
+      if (!editStatus) {
+        saveComment(commentPost.value, auth.currentUser.displayName)
+          .then((result) => {
+            createDivs(commentPost.value, auth.currentUser.displayName, result.id);
+            commentPost.value = '';
+            console.log(result.id);
+          });
+      }
     }
   });
 
