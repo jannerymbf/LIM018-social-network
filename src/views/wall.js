@@ -125,8 +125,6 @@ export const wall = () => {
       }
     });
 
-    let likeStatus = false;
-
     countLikes.innerHTML = likesQty;
 
     imgLikes.addEventListener('click', (e) => {
@@ -134,15 +132,17 @@ export const wall = () => {
       const isIncluded = likes.includes(auth.currentUser.uid);
 
       if(isIncluded){
-
+        const foundLike = likes.findIndex(e => e === auth.currentUser.uid);
+        likes.splice(foundLike, 1);
+        likesQty--;
+        console.log('diste dislike');
       }else{
         likes.push(auth.currentUser.uid);
         likesQty++;
+        console.log('diste like');
       }
+      countLikes.innerHTML = likesQty;
       updatePost(idPost, {likes: likes, likesCounter: likesQty});
-      
-      // dar y quitar likes usar toggle?
-      // countLikes.toggleAttribute(countLikes);
     });
   }
 
