@@ -22,7 +22,8 @@ import {
   updateProfile,
   addDoc,
   updateDoc,
-  deleteDoc
+  deleteDoc,
+  Timestamp,
 } from './firebase.js';
 // eslint-disable-next-line import/no-unresolved
 export const registerUser = (name, lastName, email, password) => createUserWithEmailAndPassword(auth, email, password)
@@ -57,10 +58,10 @@ export const registerUser = (name, lastName, email, password) => createUserWithE
 
     // Si el usuario verifico mail puede ingresar al wall
     // (estará comentado porque no tenemos muchos correos reales)
-    // sendEmailVerification(auth.currentUser)
-    //   .then(() => {
-    //     console.log('enviando correo');
-    //   });
+    sendEmailVerification(auth.currentUser)
+      .then(() => {
+        console.log('enviando correo');
+      });
     console.log(user);
     // termina
     // changeRoute('#/login');
@@ -72,9 +73,9 @@ export const loginUser = (email, password) => signInWithEmailAndPassword(auth, e
     // Signed in
     const user = userCredential.user;
     changeRoute('#/wall');
-    // if (user.emailVerified) {
-    //   changeRoute('#/wall');
-    // }
+    if (user.emailVerified) {
+      changeRoute('#/wall');
+    }
   });
 
 export const registerGoogle = () => {
@@ -110,7 +111,9 @@ export const registerGoogle = () => {
 
 // };
 
-export const saveComment = (comment, name) => addDoc(collection(db, 'comments'), { comment, name });
+// export const saveComment = (comment, name) => addDoc(collection(db, 'comments'), { comment, name });
+
+export const saveComment = (comment, name, date, userId, likes, likesCounter) => addDoc(collection(db, 'comments'), { comment, date, name, userId, likes, likesCounter });
 
 // export const saveWall = () => {
 //   const colRef = collection(db, 'comments');

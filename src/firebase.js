@@ -10,7 +10,8 @@ import {
   getDocs,
   addDoc,
   updateDoc,
-  deleteDoc
+  deleteDoc,
+  Timestamp
 } from 'https://www.gstatic.com/firebasejs/9.9.0/firebase-firestore.js';
 import {
   getAuth,
@@ -75,5 +76,6 @@ export {
   updateProfile,
   addDoc,
   updateDoc,
-  deleteDoc
+  deleteDoc,
+  Timestamp
 };

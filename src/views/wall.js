@@ -1,5 +1,5 @@
 import { exit, saveComment, deletePost, updatePost } from '../index.js';
-import { auth, collection, db, getDocs } from '../firebase.js';
+import { auth, collection, db, getDocs, Timestamp } from '../firebase.js';
 
 export const wall = () => {
   const viewWall = `
@@ -49,7 +49,6 @@ export const wall = () => {
   const imageProfile = containerWall.querySelector('.user-img');
 
   let editStatus = false;
-  let likeStatus = false;
 
   greeting.innerHTML = `¡Hola, ${auth.currentUser.displayName}!`;
   imageProfile.src = auth.currentUser.photoURL;
@@ -58,7 +57,13 @@ export const wall = () => {
   // getName();
   firstLoad();
 
-  function createDivs(post, name, idPost) {
+  function createDivs(postData) {
+    const idPost = postData.id;
+    const name = postData.name;
+    const post = postData.comment;
+    const likes = postData.likes ?? [];
+    let likesQty = likes.length;
+
     const container = document.createElement('div');
     const containerName = document.createElement('div');
     const containerPost = document.createElement('textarea');
@@ -120,17 +125,22 @@ export const wall = () => {
       }
     });
 
-    imgLikes.addEventListener('click', () => {
-      let counter = 0;
-      if (!likeStatus) {
-        counter++;
-        countLikes.innerHTML = counter;
-        likeStatus = true;
-      } else {
-        counter--;
-        countLikes.innerHTML = counter;
-        likeStatus = false;
+    let likeStatus = false;
+
+    countLikes.innerHTML = likesQty;
+
+    imgLikes.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isIncluded = likes.includes(auth.currentUser.uid);
+
+      if(isIncluded){
+
+      }else{
+        likes.push(auth.currentUser.uid);
+        likesQty++;
       }
+      updatePost(idPost, {likes: likes, likesCounter: likesQty});
+      
       // dar y quitar likes usar toggle?
       // countLikes.toggleAttribute(countLikes);
     });
@@ -142,23 +152,27 @@ export const wall = () => {
     getDocs(colRef)
       .then((onSnapshot) => {
         onSnapshot.docs.forEach((document) => {
+          const commentData = { id: document.id, ...document.data() };
           // posts.push({ ...doc.data(), id: doc.id });
-          posts.push({ name: document.data().name, post: document.data().comment });
-          createDivs(document.data().comment, document.data().name, document.id);
+          posts.push({ name: commentData.name, post: commentData.comment });
+          createDivs(commentData);
         });
       });
   }
 
   btnPostComment.addEventListener('click', () => {
     if (commentPost.value !== '') {
-      if (!editStatus) {
-        saveComment(commentPost.value, auth.currentUser.displayName)
-          .then((result) => {
-            createDivs(commentPost.value, auth.currentUser.displayName, result.id);
-            commentPost.value = '';
-            console.log(result.id);
-          });
-      }
+      const date = Timestamp.fromDate(new Date());
+      const userId = auth.currentUser.uid;
+      const likes = [];
+      const likesCounter = 0;
+      saveComment(commentPost.value, auth.currentUser.displayName, date, userId, likes, likesCounter)
+        .then((result) => {
+          const commentData = { id: result.id, name: auth.currentUser.displayName, comment: commentPost.value}
+          createDivs(commentData);
+          commentPost.value = '';
+          console.log(result.id);
+        });
     }
   });
 
