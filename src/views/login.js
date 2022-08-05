@@ -1,6 +1,6 @@
-import { loginUser } from '../index.js';
-import { registerGoogle } from '../index.js';
+import { loginUser, registerGoogle } from '../index.js';
 import { changeRoute } from '../routes/router.js';
+import { GoogleAuthProvider } from '../firebase.js';
 
 export const login = () => {
   const viewLogin = `
@@ -36,6 +36,15 @@ export const login = () => {
     e.preventDefault(); // Previene el comportamiento por defecto de la etiqueta <form>
     if (email.value !== '' || password.value !== '') {
       loginUser(email.value, password.value)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          changeRoute('#/wall');
+          console.log(user);
+          // if (user.emailVerified) {
+          //   changeRoute('#/wall');
+          // }
+        })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
@@ -52,7 +61,31 @@ export const login = () => {
   });
 
   btnGoogle.addEventListener('click', () => {
-    registerGoogle();
+    registerGoogle()
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // setDoc(doc(db, 'users', user.uid), {
+        //   Name: user.name,
+        //   LastName: user.lastName,
+        //   Email: user.email,
+        // });
+        changeRoute('#/wall');
+      // ...
+      })
+      .catch((error) => {
+      // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
+      });
   });
 
   return containerLogin;

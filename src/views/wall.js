@@ -1,5 +1,6 @@
 import { exit, saveComment, deletePost, updatePost } from '../index.js';
 import { auth, collection, db, getDocs, Timestamp } from '../firebase.js';
+import { changeRoute } from '../routes/router.js';
 
 export const wall = () => {
   const viewWall = `
@@ -177,7 +178,13 @@ export const wall = () => {
   });
 
   btnSignOut.addEventListener('click', () => {
-    exit();
+    exit()
+      .then(() => {
+        changeRoute('#/login');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   });
 
   return containerWall;
