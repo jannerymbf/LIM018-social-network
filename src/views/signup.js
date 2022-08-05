@@ -1,5 +1,6 @@
 import { registerUser } from '../index.js';
 import { changeRoute } from '../routes/router.js';
+import { updateProfile, setDoc, doc, db } from '../firebase.js';
 
 export const signup = () => {
   const viewSignup = `
@@ -43,8 +44,29 @@ export const signup = () => {
   btnSignup.addEventListener('click', (e) => {
     e.preventDefault();
     if (email.value !== '' || password.value !== '' || name.value !== '' || lastName.value !== '') {
-      registerUser(name.value, lastName.value, email.value, password.value)
-        .then((result) => {
+      registerUser(email.value, password.value)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          // Actualizar el perfil del usuario en auth
+          updateProfile(user, {
+            displayName: `${name.value} ${lastName.value}`,
+          }).then(() => {
+          }).catch((error) => {
+          });
+          // Añadir datos al firestore con mismo ID
+          setDoc(doc(db, 'users', user.uid), {
+            Name: name.value,
+            LastName: lastName.value,
+            Email: email.value,
+          });
+
+          // Si el usuario verifico mail puede ingresar al wall
+          // sendEmailVerification(auth.currentUser)
+          //   .then(() => {
+          //     console.log('enviando correo');
+          //   });
           modal.showModal();
         })
         .catch((error) => {
@@ -56,9 +78,6 @@ export const signup = () => {
           email.classList.add('errorInput');
           password.classList.add('errorInput');
         });
-      // btnCloseModal.addEventListener('click', () => {
-      //   modal.close();
-      // });
     } else {
       errorText.innerHTML = 'Los datos ingresados no son válidos.';
       name.classList.add('errorInput');
