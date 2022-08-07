@@ -4,9 +4,10 @@ import { GoogleAuthProvider } from '../firebase.js';
 
 export const login = () => {
   const viewLogin = `
-    <section class="login-picture-desktop">
+    <section class="picture-desktop">
       <img class="img-desktop" src="pictures/dogcat.png">
     </section>
+    
     <main class="flex">
       <section class="logo flex">
         <img class="logo-img" src="pictures/paw.png">

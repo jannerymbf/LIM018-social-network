@@ -194,18 +194,19 @@ export const wall = () => {
 
     imgLikes.addEventListener('click', (e) => {
       e.preventDefault();
+      
       const isIncluded = likes.includes(auth.currentUser.uid);
 
       if(isIncluded){
         const foundLike = likes.findIndex(e => e === auth.currentUser.uid);
         likes.splice(foundLike, 1);
         likesQty--;
-        imgLikes.src = 'pictures/heart-disabled.png';
+        imgLikes.src = 'pictures/heart-disabled.png'; // **agregué esta línea y falata que aparezca el corazón activo al cargar página
         console.log('diste dislike');
       }else{
         likes.push(auth.currentUser.uid);
         likesQty++;
-        imgLikes.src = 'pictures/heart.png';
+        imgLikes.src = 'pictures/heart.png'; // **agregué esta línea
         console.log('diste like');
       }
       countLikes.innerHTML = likesQty;

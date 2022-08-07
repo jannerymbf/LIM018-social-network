@@ -4,28 +4,34 @@ import { updateProfile, setDoc, doc, db } from '../firebase.js';
 
 export const signup = () => {
   const viewSignup = `
-    <section class="logo flex">
-      <img class="logo-img" src="pictures/paw.png">
-      <p class="logo-text">PawProtection</p>
+    <section class="picture-desktop">
+      <img class="img-desktop" src="pictures/dogcat.png">
     </section>
 
-    <section class="signup">
-      <form class="signup-form-group flex">
-        <input type="text" class="signup-name input-paw" placeholder="Nombre" required>
-        <input type="text" class="signup-lastName input-paw" placeholder="Apellidos" required>
-        <input id="emailSignup" type="email" class="signup-email input-paw" placeholder="Correo" required>
-        <input id="passSignup" type="text" class="signup-password input-paw" placeholder="Contraseña" required>
-        <div class="signup-errortext"></div>
-        <button id="btnSignup" class="signup-btnSignup btn-paw"><a>Registrar</a></button>
-        <dialog id="signup-modal" class="signup-modal">
-          <img class="check-out" src="pictures/check.png"></img>
-          <p class="modal-text1">¡Usuario registrado <br>con éxito!</p>
-          <p class="modal-text2">Revise su correo electrónico para iniciar sesión.</p>
-          <button class="signup-closeModal" id="btn-aceptar">Cerrar</button>
-        </dialog>
-      </form>
-      <p class="signup-login-text">¿Ya tienes cuenta?<a href="#/login"><strong class="login-signup-btn"> Inicia sesión.</strong></a></p>
-    </section>
+    <main class="flex">
+      <section class="logo flex">
+        <img class="logo-img" src="pictures/paw.png">
+        <p class="logo-text">PawProtection</p>
+      </section>
+
+      <section class="signup">
+        <form class="signup-form-group flex">
+          <input type="text" class="signup-name input-paw" placeholder="Nombre" required>
+          <input type="text" class="signup-lastName input-paw" placeholder="Apellidos" required>
+          <input id="emailSignup" type="email" class="signup-email input-paw" placeholder="Correo" required>
+          <input id="passSignup" type="text" class="signup-password input-paw" placeholder="Contraseña" required>
+          <div class="signup-errortext"></div>
+          <button id="btnSignup" class="signup-btnSignup btn-paw"><a>Registrar</a></button>
+          <dialog id="signup-modal" class="signup-modal">
+            <img class="check-out" src="pictures/check.png"></img>
+            <p class="modal-text1">¡Usuario registrado <br>con éxito!</p>
+            <p class="modal-text2">Revise su correo electrónico para iniciar sesión.</p>
+            <button class="signup-closeModal" id="btn-aceptar">Cerrar</button>
+          </dialog>
+        </form>
+        <p class="signup-login-text">¿Ya tienes cuenta?<a href="#/login"><strong class="login-signup-btn"> Inicia sesión.</strong></a></p>
+      </section>
+    </main>
   `;
 
   const containerSignup = document.createElement('div');

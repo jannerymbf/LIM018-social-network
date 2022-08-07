@@ -304,19 +304,19 @@ a{
 }
 
 /* Agregué esto*/
-.login-picture-desktop{
+.picture-desktop{
   display: none;
 }
 /* hasta acá */
 
 /* media queries */
 @media screen and (min-width: 960px) {
-  .view-login{
+  .view-login, .view-signup{
     display: flex;
     flex-direction: row;
     gap: 70px;
   }
-  .login-picture-desktop{
+  .picture-desktop{
     display: block;
     margin-left: -100px;
   }
