@@ -288,6 +288,40 @@ a{
   cursor: pointer;
 }
 
+/* Estilo para menú desplegable */
+
+.three-dots{
+  height: 30px;
+  width: 30px;
+}
+
+.dropdown-menu{
+  list-style: none;
+  display: none;
+  position: absolute;
+  width: 100px;
+  background-color: var(--blue-Paw);
+}
+
+/* Agregué esto*/
+.login-picture-desktop{
+  display: none;
+}
+/* hasta acá */
+
+/* media queries */
+@media screen and (min-width: 960px) {
+  .view-login{
+    display: flex;
+    flex-direction: row;
+    gap: 70px;
+  }
+  .login-picture-desktop{
+    display: block;
+    margin-left: -100px;
+  }
+}
+
 
 
 

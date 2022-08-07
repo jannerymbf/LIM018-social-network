@@ -48,7 +48,7 @@ export const signup = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
+          console.log(userCredential);
           // Actualizar el perfil del usuario en auth
           updateProfile(user, {
             displayName: `${name.value} ${lastName.value}`,

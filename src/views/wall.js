@@ -66,65 +66,129 @@ export const wall = () => {
     let likesQty = likes.length;
 
     const container = document.createElement('div');
-    const containerName = document.createElement('div');
+    const containerHeadPost = document.createElement('div'); // **agregué esta línea
+    const containerName = document.createElement('p'); // **cambié esta línea
     const containerPost = document.createElement('textarea');
+   
     // Variables para likes
     const containerLikes = document.createElement('div');
     const imgLikes = document.createElement('img');
     const countLikes = document.createElement('p');
-    // Variables para editar
-    const btnEdit = document.createElement('button');
-    const btnEditText = document.createTextNode('Editar');
-    btnEdit.appendChild(btnEditText);
-    const btnDelete = document.createElement('button');
-    const btnDeleteText = document.createTextNode('Eliminar');
-    btnDelete.appendChild(btnDeleteText);
+    // Variables para editar ** Cambié estas líneas
+    // const btnEdit = document.createElement('button');
+    // const btnEditText = document.createTextNode('Editar');
+    // btnEdit.appendChild(btnEditText);
+    // const btnDelete = document.createElement('button');
+    // const btnDeleteText = document.createTextNode('Eliminar');
+    // btnDelete.appendChild(btnDeleteText);
 
     containerName.innerHTML = name;
     containerPost.innerHTML = post;
-    containerPost.appendChild(containerName);
-    container.appendChild(containerName);
+    containerHeadPost.appendChild(containerName); // **agregue esta línea
+    //containerPost.appendChild(containerHeadPost); // **cambié esta línea
+    container.appendChild(containerHeadPost);
     container.appendChild(containerPost);
     // publishedPostsContainer.appendChild(containerName);
     // publishedPostsContainer.appendChild(containerPost);
+    containerHeadPost.setAttribute('class', 'container-head-post'); // **agregué esta línea
     containerName.setAttribute('class', 'container-post-name');
     containerPost.setAttribute('class', 'container-post');
     containerPost.setAttribute('disabled', true);
     container.setAttribute('id', idPost);
     // para los likes
-    imgLikes.setAttribute('src', 'pictures/heart.png');
+    imgLikes.setAttribute('src', 'pictures/heart-disabled.png');
     imgLikes.setAttribute('class', 'published-posts-likes-img');
     containerLikes.setAttribute('class', 'containerLikes');
     countLikes.setAttribute('class', 'published-posts-likes-number');
-    btnEdit.setAttribute('class', 'btn-edit-post');
-    btnEdit.setAttribute('data-id', idPost);
-    btnDelete.setAttribute('class', 'btn-delete-post');
-    btnDelete.setAttribute('data-id', idPost);
+    // **cmabié estas líneas
+    // btnEdit.setAttribute('class', 'btn-edit-post');
+    // btnEdit.setAttribute('data-id', idPost);
+    // btnDelete.setAttribute('class', 'btn-delete-post');
+    // btnDelete.setAttribute('data-id', idPost);
+    //** */
     containerLikes.appendChild(imgLikes);
     containerLikes.appendChild(countLikes);
-    containerLikes.appendChild(btnEdit);
-    containerLikes.appendChild(btnDelete);
+    // **Cambié estas líneas
+    // containerLikes.appendChild(btnEdit);
+    // containerLikes.appendChild(btnDelete);
+    // **
     // publishedPostsContainer.appendChild(containerLikes);
     container.appendChild(containerLikes);
     publishedPostsContainer.appendChild(container);
 
-    btnDelete.addEventListener('click', (event) => {
-      deletePost(event.target.dataset.id);
-      publishedPostsContainer.removeChild(container);
-    });
+    // **Agregué esta función para ñadir menú desplegable
+    function dropdownMenu() {
+       // **Variables para los tres puntos
+      const threeDots = document.createElement('img');
+      threeDots.setAttribute('src', 'pictures/three-dots-yellow.png');
+      threeDots.setAttribute('class', 'three-dots');
+      containerHeadPost.appendChild(threeDots);
 
-    btnEdit.addEventListener('click', (e) => {
-      if (!editStatus) {
-        containerPost.disabled = false;
-        btnEdit.innerHTML = 'Actualizar';
-        editStatus = true;
-      } else {
-        updatePost(e.target.dataset.id, { comment: containerPost.value });
-        containerPost.disabled = true;
-        btnEdit.innerHTML = 'Editar';
-        editStatus = false;
-      }
-    });
+      const dropDown = document.createElement('ul');
+      dropDown.setAttribute('class', 'dropdown-menu')
+      const dropDownEdit = document.createElement('li');
+      dropDownEdit.innerHTML = 'Editar';
+      const dropDownDelete = document.createElement('li');
+      dropDownDelete.innerHTML = 'Eliminar';
+      dropDownEdit.setAttribute('data-id', idPost);
+      dropDownDelete.setAttribute('data-id', idPost);
+      dropDown.appendChild(dropDownEdit);
+      dropDown.appendChild(dropDownDelete);
+      containerHeadPost.appendChild(dropDown);
+
+      let menuStatus = false;
+      threeDots.addEventListener('click', () => {
+        if(!menuStatus){
+          dropDown.style.display = 'block';
+          menuStatus = true;
+        }else{
+          dropDown.style.display = 'none';
+          menuStatus = false;
+        }
+      })
+
+      dropDownEdit.addEventListener('click', (e) => {
+        if (!editStatus) {
+          //agregar mensaje de confirmación
+          containerPost.disabled = false;
+          dropDownEdit.innerHTML = 'Actualizar';
+          editStatus = true;
+        } else {
+          updatePost(e.target.dataset.id, { comment: containerPost.value });
+          containerPost.disabled = true;
+          dropDownEdit.innerHTML = 'Editar';
+          editStatus = false;
+        }
+      });
+
+      dropDownDelete.addEventListener('click', (event) => {
+        deletePost(event.target.dataset.id);
+        publishedPostsContainer.removeChild(container);
+      });
+    }
+
+    if(postData.userId == auth.currentUser.uid){
+      dropdownMenu();
+    }
+    // **hasta acá
+
+    // btnDelete.addEventListener('click', (event) => {
+    //   deletePost(event.target.dataset.id);
+    //   publishedPostsContainer.removeChild(container);
+    // });
+
+    // btnEdit.addEventListener('click', (e) => {
+    //   if (!editStatus) {
+    //     containerPost.disabled = false;
+    //     btnEdit.innerHTML = 'Actualizar';
+    //     editStatus = true;
+    //   } else {
+    //     updatePost(e.target.dataset.id, { comment: containerPost.value });
+    //     containerPost.disabled = true;
+    //     btnEdit.innerHTML = 'Editar';
+    //     editStatus = false;
+    //   }
+    // });
 
     countLikes.innerHTML = likesQty;
 
@@ -136,10 +200,12 @@ export const wall = () => {
         const foundLike = likes.findIndex(e => e === auth.currentUser.uid);
         likes.splice(foundLike, 1);
         likesQty--;
+        imgLikes.src = 'pictures/heart-disabled.png';
         console.log('diste dislike');
       }else{
         likes.push(auth.currentUser.uid);
         likesQty++;
+        imgLikes.src = 'pictures/heart.png';
         console.log('diste like');
       }
       countLikes.innerHTML = likesQty;
