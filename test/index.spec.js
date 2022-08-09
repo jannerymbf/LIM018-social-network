@@ -1,17 +1,17 @@
-// importamos la funcion que vamos a testear
 /**
  * @jest-environment jsdom
  */
 
-import signup from '../src/views/signup.js';
+import { signup } from '../src/views/signup.js';
 
 jest.mock('../src/index.js');
+jest.mock('../src/firebase.js');
 
 describe('signup', () => {
   it('click del boton Registrar', () => {
     document.body.appendChild(signup());
     const btnSignup = document.querySelector('.signup-btnSignup');
-    expect(btnSignup instanceof HTMLElement).toBe('true');
+    expect(btnSignup instanceof HTMLElement).toBe(true);
   });
 });
 

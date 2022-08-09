@@ -11,7 +11,9 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
-  Timestamp
+  Timestamp,
+  query,
+  orderBy
 } from 'https://www.gstatic.com/firebasejs/9.9.0/firebase-firestore.js';
 import {
   getAuth,
@@ -77,5 +79,7 @@ export {
   addDoc,
   updateDoc,
   deleteDoc,
-  Timestamp
+  Timestamp,
+  query,
+  orderBy,
 };

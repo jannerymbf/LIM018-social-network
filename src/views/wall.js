@@ -1,5 +1,5 @@
 import { exit, saveComment, deletePost, updatePost } from '../index.js';
-import { auth, collection, db, getDocs, Timestamp } from '../firebase.js';
+import { auth, collection, db, getDocs, querySnapshot, Timestamp, query, orderBy, doc } from '../firebase.js';
 import { changeRoute } from '../routes/router.js';
 
 export const wall = () => {
@@ -62,18 +62,30 @@ export const wall = () => {
     const idPost = postData.id;
     const name = postData.name;
     const post = postData.comment;
+    const datePost = postData.date;
     const likes = postData.likes ?? [];
     let likesQty = likes.length;
+
+    const weekDay = [ 'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
+    const monthYear = [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
     const container = document.createElement('div');
     const containerHeadPost = document.createElement('div'); // **agregué esta línea
     const containerName = document.createElement('p'); // **cambié esta línea
+    const containerDate = document.createElement('p'); // **agregué esta línea
     const containerPost = document.createElement('textarea');
    
     // Variables para likes
     const containerLikes = document.createElement('div');
     const imgLikes = document.createElement('img');
     const countLikes = document.createElement('p');
+
+    // ***JC
+    // if(postData.likeColoredImg){
+    //   imgLikes.src = postData.likeColoredImg;
+    // }
+    // ***
+
     // Variables para editar ** Cambié estas líneas
     // const btnEdit = document.createElement('button');
     // const btnEditText = document.createTextNode('Editar');
@@ -84,7 +96,9 @@ export const wall = () => {
 
     containerName.innerHTML = name;
     containerPost.innerHTML = post;
+    containerDate.innerHTML = `${ weekDay[datePost.toDate().getDay()]}, ${datePost.toDate().getDate()} de ${monthYear[datePost.toDate().getMonth()]} de ${datePost.toDate().getFullYear()}`;
     containerHeadPost.appendChild(containerName); // **agregue esta línea
+    containerHeadPost.appendChild(containerDate);
     //containerPost.appendChild(containerHeadPost); // **cambié esta línea
     container.appendChild(containerHeadPost);
     container.appendChild(containerPost);
@@ -216,19 +230,29 @@ export const wall = () => {
 
   function firstLoad() {
     const colRef = collection(db, 'comments');
-    let posts = [];
-    getDocs(colRef)
+    const q = query(colRef, orderBy("date", "desc"));
+    
+    getDocs(q)
       .then((onSnapshot) => {
         onSnapshot.docs.forEach((document) => {
-          const commentData = { id: document.id, ...document.data() };
-          // posts.push({ ...doc.data(), id: doc.id });
-          posts.push({ name: commentData.name, post: commentData.comment });
+          let commentData = { id: document.id, ...document.data() };
+          //commentData = likes(commentData, auth.currentUser.uid);
           createDivs(commentData);
         });
       });
   }
 
-  btnPostComment.addEventListener('click', () => {
+  // 1. id usuario actual
+  // 2. document
+  // 3. la referencia de la imagen
+  // function likes(document, idUser) {
+  //   if(document.likes.includes(idUser)){
+  //     return {...document, likeColoredImg: 'pictures/heart.png' }
+  //   }
+  // }
+
+  btnPostComment.addEventListener('click', (e) => {
+    e.preventDefault;
     if (commentPost.value !== '') {
       const date = Timestamp.fromDate(new Date());
       const userId = auth.currentUser.uid;
@@ -236,10 +260,14 @@ export const wall = () => {
       const likesCounter = 0;
       saveComment(commentPost.value, auth.currentUser.displayName, date, userId, likes, likesCounter)
         .then((result) => {
+          //console.log(result.orderBy('date', 'desc'));
+          //const q = query(result, orderBy('date', 'desc'));
+          publishedPostsContainer.innerHTML = '';
+          firstLoad();
           const commentData = { id: result.id, name: auth.currentUser.displayName, comment: commentPost.value}
-          createDivs(commentData);
+          //createDivs(commentData);
           commentPost.value = '';
-          console.log(result.id);
+          console.log(result);
         });
     }
   });
