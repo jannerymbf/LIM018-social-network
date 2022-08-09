@@ -22,7 +22,7 @@ export const wall = () => {
       <img class="post-btnpost" src="pictures/send.png">
     </section>
 
-    <section class="published-posts flex">
+    <section class="published-posts">
       <div class="published-posts-container">
         <!--<div class="published-posts-box"></div>
               <select class="published-posts-btn">
@@ -52,7 +52,14 @@ export const wall = () => {
   let editStatus = false;
 
   greeting.innerHTML = `¡Hola, ${auth.currentUser.displayName}!`;
-  imageProfile.src = auth.currentUser.photoURL;
+  function imageSee(){
+    if (auth.currentUser.photoURL === null){
+     imageProfile.src = "pictures/user.png";
+     } else {
+     imageProfile.src = auth.currentUser.photoURL;
+   }
+  }
+  imageSee();
   // greeting.innerHTML = `¡Hola, ${localStorage.getItem('nameUser')}!`;
   // console.log(auth.currentUser.email);
   // getName();
@@ -71,6 +78,7 @@ export const wall = () => {
 
     const container = document.createElement('div');
     const containerHeadPost = document.createElement('div'); // **agregué esta línea
+    const containerNameDate = document.createElement('div'); // para agrupar name y date del post
     const containerName = document.createElement('p'); // **cambié esta línea
     const containerDate = document.createElement('p'); // **agregué esta línea
     const containerPost = document.createElement('textarea');
@@ -97,15 +105,18 @@ export const wall = () => {
     containerName.innerHTML = name;
     containerPost.innerHTML = post;
     containerDate.innerHTML = `${ weekDay[datePost.toDate().getDay()]}, ${datePost.toDate().getDate()} de ${monthYear[datePost.toDate().getMonth()]} de ${datePost.toDate().getFullYear()}`;
-    containerHeadPost.appendChild(containerName); // **agregue esta línea
-    containerHeadPost.appendChild(containerDate);
+    containerNameDate.appendChild(containerName); // **agregue esta línea
+    containerNameDate.appendChild(containerDate);
+    containerHeadPost.appendChild(containerNameDate);
     //containerPost.appendChild(containerHeadPost); // **cambié esta línea
     container.appendChild(containerHeadPost);
     container.appendChild(containerPost);
     // publishedPostsContainer.appendChild(containerName);
     // publishedPostsContainer.appendChild(containerPost);
     containerHeadPost.setAttribute('class', 'container-head-post'); // **agregué esta línea
+    containerNameDate.setAttribute('class', 'container-name-date'); // **agregué esta línea
     containerName.setAttribute('class', 'container-post-name');
+    containerDate.setAttribute('class', 'container-post-date');
     containerPost.setAttribute('class', 'container-post');
     containerPost.setAttribute('disabled', true);
     container.setAttribute('id', idPost);
