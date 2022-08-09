@@ -208,12 +208,12 @@ a{
 }
 
 .container-head-post{
-  width: 76%;
+  width: 72.5%;
   height: 100px;
   background-color: var(--green-Paw);
   color: white;
     /* justify-self: center; */
-  margin-left: 12%;
+  margin-left: 13.7%;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   margin-top: 30px;
@@ -234,6 +234,7 @@ a{
   margin: 10px;
   font-weight: 700;
   width: 70%;
+  font-size: 1.25rem;
 }
 
 .container-post-date{
@@ -314,14 +315,54 @@ a{
 .three-dots{
   height: 30px;
   width: 30px;
+  cursor: pointer;
+
+  padding-right: 20px;
 }
 
 .dropdown-menu{
   list-style: none;
   display: none;
   position: absolute;
-  width: 100px;
+  width: 130px;
   background-color: var(--blue-Paw);
+  
+
+  margin-left: 61%;
+  margin-top: 10%;
+  border-radius: 7px;
+  line-height: 2.5;
+  background-color: var(--lightgray-Paw);
+  color: gray;
+
+  padding-left: 0px;
+}
+
+.dropdown-menu li:nth-child(n){
+  padding: 0px 20px;
+}
+
+.dropdown-menu li:nth-child(n):hover{
+  background-color: var(--gray-Paw);
+  color: white;
+  cursor: pointer;
+}
+
+.btn-update-post{
+  display: none;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  background-color: var(--blue-Paw);
+  font-family: 'Poppins';
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 17%;
+}
+
+.btn-update-post:hover{
+  cursor: pointer;
+  background-color: var(--lightblue-Paw);
 }
 
 /* Agregué esto*/

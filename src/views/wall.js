@@ -95,9 +95,9 @@ export const wall = () => {
     // ***
 
     // Variables para editar ** Cambié estas líneas
-    // const btnEdit = document.createElement('button');
-    // const btnEditText = document.createTextNode('Editar');
-    // btnEdit.appendChild(btnEditText);
+    const btnUpdate = document.createElement('button');
+    const btnUpdateText = document.createTextNode('Actualizar');
+    btnUpdate.appendChild(btnUpdateText);
     // const btnDelete = document.createElement('button');
     // const btnDeleteText = document.createTextNode('Eliminar');
     // btnDelete.appendChild(btnDeleteText);
@@ -126,8 +126,8 @@ export const wall = () => {
     containerLikes.setAttribute('class', 'containerLikes');
     countLikes.setAttribute('class', 'published-posts-likes-number');
     // **cmabié estas líneas
-    // btnEdit.setAttribute('class', 'btn-edit-post');
-    // btnEdit.setAttribute('data-id', idPost);
+    btnUpdate.setAttribute('class', 'btn-update-post');
+    btnUpdate.setAttribute('data-id', idPost);
     // btnDelete.setAttribute('class', 'btn-delete-post');
     // btnDelete.setAttribute('data-id', idPost);
     //** */
@@ -135,7 +135,7 @@ export const wall = () => {
     containerLikes.appendChild(countLikes);
     // **Cambié estas líneas
     // containerLikes.appendChild(btnEdit);
-    // containerLikes.appendChild(btnDelete);
+    containerLikes.appendChild(btnUpdate);
     // **
     // publishedPostsContainer.appendChild(containerLikes);
     container.appendChild(containerLikes);
@@ -173,20 +173,30 @@ export const wall = () => {
       })
 
       dropDownEdit.addEventListener('click', (e) => {
-        if (!editStatus) {
-          //agregar mensaje de confirmación
-          containerPost.disabled = false;
-          dropDownEdit.innerHTML = 'Actualizar';
-          editStatus = true;
-        } else {
-          updatePost(e.target.dataset.id, { comment: containerPost.value });
-          containerPost.disabled = true;
-          dropDownEdit.innerHTML = 'Editar';
-          editStatus = false;
-        }
+        // if (!editStatus) {
+        //   //agregar mensaje de confirmación
+        //   containerPost.disabled = false;
+        //   dropDownEdit.innerHTML = 'Actualizar';
+        //   editStatus = true;
+        // } else {
+        //   updatePost(e.target.dataset.id, { comment: containerPost.value });
+        //   containerPost.disabled = true;
+        //   dropDownEdit.innerHTML = 'Editar';
+        //   editStatus = false;
+        // }
+        btnUpdate.style.display = 'block';
+        containerPost.disabled = false;
+        dropDown.style.display = 'none';
+
+        btnUpdate.addEventListener('click', () => {
+            updatePost(e.target.dataset.id, { comment: containerPost.value });
+            containerPost.disabled = true;
+            btnUpdate.style.display = 'none';
+        })
       });
 
       dropDownDelete.addEventListener('click', (event) => {
+        // Agregar mensaje de confirmación
         deletePost(event.target.dataset.id);
         publishedPostsContainer.removeChild(container);
       });
@@ -196,24 +206,6 @@ export const wall = () => {
       dropdownMenu();
     }
     // **hasta acá
-
-    // btnDelete.addEventListener('click', (event) => {
-    //   deletePost(event.target.dataset.id);
-    //   publishedPostsContainer.removeChild(container);
-    // });
-
-    // btnEdit.addEventListener('click', (e) => {
-    //   if (!editStatus) {
-    //     containerPost.disabled = false;
-    //     btnEdit.innerHTML = 'Actualizar';
-    //     editStatus = true;
-    //   } else {
-    //     updatePost(e.target.dataset.id, { comment: containerPost.value });
-    //     containerPost.disabled = true;
-    //     btnEdit.innerHTML = 'Editar';
-    //     editStatus = false;
-    //   }
-    // });
 
     countLikes.innerHTML = likesQty;
 
