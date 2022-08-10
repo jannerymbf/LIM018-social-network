@@ -10,7 +10,7 @@ jest.mock('../src/index.js');
 jest.mock('../src/firebase.js');
 
 describe('signup', () => {
-  it('click del boton Registrar', () => {
+  it('debería mostrar el botón Registrar', () => {
     document.body.appendChild(signup());
     const btnSignup = document.querySelector('.signup-btnSignup');
     expect(btnSignup instanceof HTMLElement).toBe(true);
