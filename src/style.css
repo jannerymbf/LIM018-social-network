@@ -175,7 +175,8 @@ a{
   margin: 1rem;
 }
 
-.post-editableText, .container-post{
+.post-editableText{
+  /*quité el container-post*/
   width: 70%;
   height: 30%;
   border-radius: 20px;
@@ -192,28 +193,41 @@ a{
   margin-right: 15%;
 }
 
+.general-container-post{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10%;
+  position: relative;
+}
+
 .container-post{
   /* Por mientras */
-  width: initial;
   height: 100px;
   background-color: white;
   border: 2px solid var(--green-Paw);
-  margin: 0% 12% 2% 12%;
+  /* margin: 0% 12% 2% 12%; */
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
 
   font-family: 'Poppins';
-  width: 70%;
+  width: 100%;
   text-align: center;
+  padding: 0px;
+  margin: -1px;
+}
+
+.container-post:focus{
+  outline-color: var(--blue-Paw);
 }
 
 .container-head-post{
-  width: 72.5%;
+  width: 100%;
   height: 100px;
   background-color: var(--green-Paw);
   color: white;
     /* justify-self: center; */
-  margin-left: 13.7%;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   margin-top: 30px;
@@ -245,6 +259,9 @@ a{
 .containerLikes{
   display: flex;
   margin-left: 15%;
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
 }
 
 /* .published-posts-likes{
