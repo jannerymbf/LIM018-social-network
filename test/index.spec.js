@@ -4,6 +4,7 @@
 
 import { signup } from '../src/views/signup.js';
 import { login } from '../src/views/login.js';
+// import { changeRoute } from '../routes/router.js';
 
 jest.mock('../src/index.js');
 jest.mock('../src/firebase.js');
@@ -75,7 +76,7 @@ describe('signup', () => {
     const containerRoot = document.getElementById('root');
     // containerRoot.appendChild(login());
     btnCloseModal.click();
-    expect().toBe();
+    // expect().toBe();
     // entrar a changeRoute y testear esa línea
   });
 });

@@ -178,12 +178,15 @@ export const wall = () => {
 
       // Modal para confirmación de delete y edit
       const modalConf = document.createElement('dialog');
+      modalConf.setAttribute('class', 'modal-conf');
       const textModalConf = document.createElement('p');
       textModalConf.innerHTML = '¿Desea eliminar esta publicación?';
       const btnYesModalConf = document.createElement('button');
       btnYesModalConf.innerHTML = 'Eliminar';
       const btnNoModalConf = document.createElement('button');
       btnNoModalConf.innerHTML = 'Cancelar';
+      btnYesModalConf.setAttribute('class', 'btn-modalConf-yes');
+      btnNoModalConf.setAttribute('class', 'btn-modalConf-no');
       modalConf.appendChild(textModalConf);
       modalConf.appendChild(btnYesModalConf);
       modalConf.appendChild(btnNoModalConf);
@@ -206,11 +209,17 @@ export const wall = () => {
       dropDownDelete.addEventListener('click', (event) => {
         // Agregar mensaje de confirmación
         modalConf.showModal();
+        dropDown.style.display = 'none';
         //pendiente
-        if(btnYesModalConf.click()){
+        btnYesModalConf.addEventListener('click', () => {
           deletePost(event.target.dataset.id);
           publishedPostsContainer.removeChild(container);
-        }
+          modalConf.close();
+        })
+        btnNoModalConf.addEventListener('click', () => {
+          modalConf.close();
+        })
+        
       });
     }
 
