@@ -19,4 +19,9 @@ export const loginUser = (email, password) => {
   });
 };
 
-export const registerGoogle = () => Promise.reject(new Error());
+// eslint-disable-next-line prefer-promise-reject-errors
+export const registerGoogle = () => Promise.reject({ code: 12, message: '', customData: { email: '' } });
+
+export const saveComment = () => Promise.resolve({});
+
+export const exit = () => Promise.resolve();

@@ -49,13 +49,12 @@ export const wall = () => {
   const publishedPostsContainer = containerWall.querySelector('.published-posts-container');
   const imageProfile = containerWall.querySelector('.user-img');
 
-  let editStatus = false;
-
   greeting.innerHTML = `¡Hola, ${auth.currentUser.displayName}!`;
   function imageSee(){
     if (auth.currentUser.photoURL === null){
      imageProfile.src = "pictures/user.png";
      } else {
+     console.log(auth.currentUser);
      imageProfile.src = auth.currentUser.photoURL;
    }
   }
@@ -92,7 +91,6 @@ export const wall = () => {
     // ***JC
     if(postData.likeColoredImg){
       imgLikes.src = postData.likeColoredImg;
-      console.log('Entrando al if');
     } else {
       imgLikes.setAttribute('src', 'pictures/heart-disabled.png');
     }
@@ -284,6 +282,7 @@ export const wall = () => {
       const userId = auth.currentUser.uid;
       const likes = [];
       const likesCounter = 0;
+      console.log(':D :d');
       saveComment(commentPost.value, auth.currentUser.displayName, date, userId, likes, likesCounter)
         .then((result) => {
           //console.log(result.orderBy('date', 'desc'));
@@ -303,9 +302,6 @@ export const wall = () => {
       .then(() => {
         changeRoute('#/login');
       })
-      .catch((error) => {
-        console.log(error);
-      });
   });
 
   return containerWall;

@@ -3,13 +3,17 @@
  */
 
 import { signup } from '../src/views/signup.js';
-import { login } from '../src/views/login.js';
-// import { changeRoute } from '../routes/router.js';
 
 jest.mock('../src/index.js');
 jest.mock('../src/firebase.js');
 
 describe('signup', () => {
+  beforeAll(() => {
+    HTMLDialogElement.prototype.show = jest.fn();
+    HTMLDialogElement.prototype.showModal = jest.fn();
+    HTMLDialogElement.prototype.close = jest.fn();
+  });
+
   it('debería mostrar el botón Registrar', () => {
     document.body.appendChild(signup());
     const btnSignup = document.querySelector('.signup-btnSignup');
@@ -25,12 +29,6 @@ describe('signup', () => {
     btnSignup.click();
     const errorText = document.querySelector('.signup-errortext');
     expect(errorText.textContent).toEqual('Los datos ingresados no son válidos.');
-  });
-
-  beforeAll(() => {
-    HTMLDialogElement.prototype.show = jest.fn();
-    HTMLDialogElement.prototype.showModal = jest.fn();
-    HTMLDialogElement.prototype.close = jest.fn();
   });
 
   it('debería mostrar modal', () => {
@@ -72,11 +70,14 @@ describe('signup', () => {
 
   it('debería cerrar el modal', () => {
     document.body.appendChild(signup());
+    const root = document.createElement('div');
+    root.setAttribute('id', 'root');
+    document.body.appendChild(root);
+
     const btnCloseModal = document.querySelector('.signup-closeModal');
-    const containerRoot = document.getElementById('root');
-    // containerRoot.appendChild(login());
     btnCloseModal.click();
-    // expect().toBe();
+    console.log(window.location.hash);
+    expect(window.location.hash).toBe('#/login');
     // entrar a changeRoute y testear esa línea
   });
 });

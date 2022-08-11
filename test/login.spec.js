@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-
 import { login } from '../src/views/login.js';
 
 jest.mock('../src/index.js');
@@ -25,6 +24,21 @@ describe('testeando la función login()', () => {
     expect(errorText.textContent).toEqual('El correo y/o contraseña ingresados no están conectados a ninguna cuenta.');
   });
 
+  // ***pendiente --> no corre
+  it('debería cambiar de ruta al #/wall', (done) => {
+    document.body.appendChild(login());
+    const root = document.createElement('div');
+    root.setAttribute('id', 'root');
+    document.body.appendChild(root);
+    const btnLogin = document.querySelector('.login-btnLogin');
+    btnLogin.click();
+    console.log(window.location.hash);
+    expect(window.location.hash).toBe('#/wall');
+    done();
+    // entrar a changeRoute y testear esa línea
+  });
+  // **hasta acá
+
   it('debería mostrar error al pasar al catch', () => {
     document.body.appendChild(login());
     const btnLogin = document.querySelector('.login-btnLogin');
@@ -44,11 +58,13 @@ describe('testeando la función login()', () => {
     expect(btnGoogle instanceof HTMLElement).toBe(true);
   });
 
+  // *** pendiente test de Google si es que es un caso de éxito
   it('al hacer click al botón de Google debería pasar al catch', () => {
     document.body.appendChild(login());
     const btnGoogle = document.querySelector('.login-google-img');
 
     btnGoogle.click();
-    expect(btnGoogle instanceof HTMLElement).toBe(true);
+    const errorText = document.querySelector('.login-errortext');
+    expect(errorText.textContent).toEqual('El correo y/o contraseña ingresados no están conectados a ninguna cuenta.');
   });
 });
