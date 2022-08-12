@@ -59,13 +59,17 @@ describe('testeando la función wall()', () => {
     expect(container instanceof HTMLElement).toBe(true);
   });
 
-  it('debería cerrar sesión y retornar al login', () => {
+  it('debería cerrar sesión y retornar al login', (done) => {
+    document.body.innerHTML = '<div id="root"></div>';
     document.body.appendChild(wall());
-    const root = document.createElement('div');
-    root.setAttribute('id', 'root');
-    document.body.appendChild(root);
+
     const btnSignOut = document.querySelector('.btn-exit');
     btnSignOut.click();
-    expect(window.location.hash).toBe('#/login');
+
+    const p = new Promise(process.nextTick);
+    p.then(() => {
+      expect(window.location.hash).toBe('#/login');
+      done();
+    });
   });
 });

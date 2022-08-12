@@ -20,7 +20,7 @@ export const loginUser = (email, password) => {
 };
 
 // eslint-disable-next-line prefer-promise-reject-errors
-export const registerGoogle = () => Promise.reject({ code: 12, message: '', customData: { email: '' } });
+export const registerGoogle = jest.fn(() => Promise.resolve({ user: '' }));
 
 export const saveComment = () => Promise.resolve({});
 

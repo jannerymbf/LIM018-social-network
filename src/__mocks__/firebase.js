@@ -1,6 +1,6 @@
 // export const GoogleAuthProvider = () => null; // momentaneo
 
-export const GoogleAuthProvider = { credentialFromResult: function() {}, credentialFromError: function() {} };
+export const GoogleAuthProvider = { credentialFromResult: function() {return { accessToken: '' }}, credentialFromError: function() {} };
 export const updateProfile = () => Promise.resolve();
 export const setDoc = jest.fn();
 export const doc = jest.fn();
