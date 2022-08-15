@@ -43,6 +43,13 @@ const firebaseConfig = {
   storageBucket: 'pawprotection-855b8.appspot.com',
   messagingSenderId: '896421227210',
   appId: '1:896421227210:web:8f6515899b4d8f98da6233',
+  //PawProtectionFinal
+  // apiKey: "AIzaSyCNsRdrpkt5R5X958ZHmO1tLa2j62T4IYU",
+  // authDomain: "pawprotectionfinal.firebaseapp.com",
+  // projectId: "pawprotectionfinal",
+  // storageBucket: "pawprotectionfinal.appspot.com",
+  // messagingSenderId: "814270052805",
+  // appId: "1:814270052805:web:7d5ee6b89d2c09f1db33ac"
 };
 
 // Initialize Firebase

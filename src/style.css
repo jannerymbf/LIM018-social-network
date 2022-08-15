@@ -212,10 +212,15 @@ a{
   border-top-right-radius: 0px;
 
   font-family: 'Poppins';
+  font-size: initial;
   width: 100%;
   text-align: center;
   padding: 0px;
-  margin: -1px;
+  /*margin: -1px;*/
+
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding-top: 20px;
 }
 
 .container-post:focus{
@@ -232,6 +237,7 @@ a{
   border-top-right-radius: 20px;
   margin-top: 30px;
   padding-top: 7px;
+  border: 2px solid var(--green-Paw);
 
   display: flex;
   flex-direction: row;
