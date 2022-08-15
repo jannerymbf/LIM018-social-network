@@ -259,7 +259,6 @@ export const wall = () => {
         onSnapshot.docs.forEach((document) => {
           let commentData = { id: document.id, ...document.data() };
           commentData = likes(commentData, auth.currentUser.uid);
-          console.log(commentData);
           createDivs(commentData);
         });
       });

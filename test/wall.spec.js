@@ -55,8 +55,14 @@ describe('testeando la función wall()', () => {
     const commentPost = document.querySelector('.post-editableText');
     commentPost.value = 'Hola';
     btnPostComment.click();
-    const container = document.createElement('div');
+    const container = document.querySelector('.general-container-post');
     expect(container instanceof HTMLElement).toBe(true);
+    const threeDots = document.querySelector('.three-dots');
+    threeDots.click();
+    const menu = document.querySelector('dropdown-menu');
+    expect(menu instanceof HTMLElement).toBe(false);
+    threeDots.click();
+    expect(menu instanceof HTMLElement).toBe(false);
   });
 
   it('debería cerrar sesión y retornar al login', (done) => {
