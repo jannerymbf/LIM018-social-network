@@ -72,6 +72,13 @@ export const wall = () => {
     const likes = postData.likes ?? [];
     let likesQty = likes.length;
 
+    // Variables para las horas
+    let hours = datePost.toDate().getHours() ;
+    let minutes = datePost.toDate().getMinutes();
+    minutes = ('0' + minutes).slice(-2);
+    let jornada = hours >= 12 ? 'PM'  : 'AM';
+    // hasta acá
+
     const weekDay = [ 'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
     const monthYear = [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
@@ -106,7 +113,7 @@ export const wall = () => {
 
     containerName.innerHTML = name;
     containerPost.innerHTML = post;
-    containerDate.innerHTML = `${ weekDay[datePost.toDate().getDay()]}, ${datePost.toDate().getDate()} de ${monthYear[datePost.toDate().getMonth()]} de ${datePost.toDate().getFullYear()}`;
+    containerDate.innerHTML = `${ weekDay[datePost.toDate().getDay()]}, ${datePost.toDate().getDate()} de ${monthYear[datePost.toDate().getMonth()]} de ${datePost.toDate().getFullYear()}, a las ${hours % 12}:${minutes}   ${jornada}`;
     containerNameDate.appendChild(containerName); // **agregue esta línea
     containerNameDate.appendChild(containerDate);
     containerHeadPost.appendChild(containerNameDate);

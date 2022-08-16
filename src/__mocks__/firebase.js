@@ -10,7 +10,7 @@ export const collection = jest.fn();
 export const query = jest.fn();
 export const orderBy = jest.fn();
 // eslint-disable-next-line object-shorthand
-export const getDocs = () => Promise.resolve({ docs: [{ id: '123', data: function () { return { id: '', likes: ['123'], name: '', comment: '', date: { toDate: function () { return { getDay() {}, getDate() {}, getMonth() {}, getFullYear() {} }; } } }; } }] });
+export const getDocs = () => Promise.resolve({ docs: [{ id: '123', data: function () { return { id: '', likes: ['123'], name: '', comment: '', date: { toDate: function () { return { getDay() {}, getDate() {}, getMonth() {}, getFullYear() {}, getHours() {}, getMinutes() {} }; } } }; } }] });
 // export const getDocs = () => Promise.resolve({ docs: [] });
 export const Timestamp = { fromDate() {} };
 export const addDoc = jest.fn();
