@@ -1,0 +1,449 @@
+:root{
+  --green-Paw: #93D152;
+  --blue-Paw: #02BDCB;
+  --lightblue-Paw: #04CFDE;
+  --yellow-Paw: #FFED4F;
+  --orange-Paw: #FCC116;
+  --darkorange-Paw: #F9B900; /*Pendiente */
+  --gray-Paw: #ABA9A9;
+  --lightgray-Paw: #D9D9D9;
+}
+
+body{
+  margin: 0;
+  font-family: "Poppins";
+}
+
+.flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.root-background{
+  height: 100vh; 
+  position: relative;
+}
+
+.root-background::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0.05;
+  background-image: url("pictures/background.png");
+  background-attachment: fixed; 
+  background-size: cover;
+  background-position: center;
+}
+
+.view-login, .view-signup, .view-wall{
+  position: relative;
+}
+
+.root-background:first-child{
+  opacity:initial;
+}
+
+.logo-img{
+  height: 100px;
+  width: 100px;
+}
+
+.logo-text{
+  font-weight: 700;
+  color: var(--orange-Paw);
+  font-size: 1rem;
+  margin: 0.6rem 0rem;
+}
+
+.input-paw, .post-editableText{
+  width: 15rem;
+  height: 2.2rem;
+  border-radius: 50px;
+  border: 2px solid var(--gray-Paw);
+  margin: 0.6rem 0rem;   
+  padding-left: 0.8rem;
+  font-family: "Poppins";
+}
+
+.input-paw::placeholder, .post-editableText::placeholder{
+  font-family: "Poppins";
+  color: var(--lightgray-Paw);
+  font-size: 16px;
+}
+
+.input-paw:focus, .post-editableText:focus{
+  outline-color: var(--blue-Paw);
+}
+
+.login-errortext, .signup-errortext{
+  color: red;
+  font-size: 0.8rem;
+  width: 18rem;
+}
+
+.errorInput{
+  border: 1px solid red;
+}
+
+.login-btnLogin, .signup-btnSignup{
+  margin: 0.6rem 0rem;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+}
+
+.btn-paw, .signup-closeModal{
+  border-radius: 50px;
+  border: none;
+  background-color: var(--orange-Paw);
+  width: 11rem;
+  height: 2.2rem;
+  
+  font-family: "Poppins";
+  font-size: 1rem;
+}
+
+.btn-paw:hover{
+  background-color: var(--darkorange-Paw);
+  cursor: pointer;
+}
+
+.login-signup-btn, .btn-exit{
+  color: var(--blue-Paw);
+}
+
+.login-signup-btn:hover, .btn-exit:hover{
+  border-bottom: 2px solid var(--blue-Paw);
+  cursor: pointer;
+}
+
+.login-google-img{
+  height: 40px;
+  width: 40px;
+}
+
+.login-google-img:hover, .post-btnpost:hover, .published-posts-likes-img:hover{
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.view-wall{
+  height: 100%;
+  width: 100%;
+}
+
+.flex-wall{
+  display: flex;
+  flex-direction: row;
+}
+
+.header-wall{
+  justify-content: space-between;
+  align-items: center;
+  margin: 2.25rem;
+}
+
+.logo-wall{
+  gap: 10px;
+}
+
+.logo-img-wall, .post-btnpost, .published-posts-likes-img{
+  height: 30px;
+  width: 30px;
+  align-self: center;
+}
+
+.user-img{
+  /* height: 6rem;
+  width: 6rem; */
+  height: 7rem;
+  width: 7rem;
+  border-radius: 100px;
+}
+
+.user-text{
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 1rem;
+}
+
+.post-editableText{
+  /*quité el container-post*/
+  width: 70%;
+  height: 30%;
+  border-radius: 20px;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.published-posts-container{
+  align-self: normal;
+}
+
+.post-btnpost{
+  align-self: flex-end;
+  margin-right: 15%;
+}
+
+.general-container-post{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10%;
+  position: relative;
+}
+
+.container-post{
+  /* Por mientras */
+  height: 100px;
+  background-color: white;
+  border: 2px solid var(--green-Paw);
+  /* margin: 0% 12% 2% 12%; */
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+
+  font-family: 'Poppins';
+  font-size: initial;
+  width: 100%;
+  text-align: center;
+  padding: 0px;
+  /*margin: -1px;*/
+
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding-top: 20px;
+}
+
+.container-post:focus{
+  outline-color: var(--blue-Paw);
+}
+
+.container-head-post{
+  width: 100%;
+  height: 100px;
+  background-color: var(--green-Paw);
+  color: white;
+    /* justify-self: center; */
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  margin-top: 30px;
+  padding-top: 7px;
+  border: 2px solid var(--green-Paw);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+}
+
+.container-name-date{
+  flex: 2 1 auto;
+  padding-left: 30px;
+}
+
+.container-post-name{
+  margin: 10px;
+  font-weight: 700;
+  width: 70%;
+  font-size: 1.25rem;
+}
+
+.container-post-date{
+  font-size: 0.75rem;
+  margin: 10px;
+}
+
+.containerLikes{
+  display: flex;
+  margin-left: 15%;
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+}
+
+/* .published-posts-likes{
+  align-self: flex-start;
+  justify-self: baseline;
+  /* margin-left: 15%; 
+} */
+
+.published-posts-likes-number{
+  margin: 0rem 0.5rem;
+}
+
+.btn-edit-post, .btn-delete-post{
+  border-radius: 10px;
+  border: none;
+  background-color: var(--blue-Paw);
+  color: white;
+  font-family: 'Poppins';
+  margin-right: 10px;
+}
+
+.btn-delete-post{
+  background-color: var(--gray-Paw);
+}
+
+/*Estilo para modal*/
+
+.signup-modal{
+  width: 246px;
+  height: 230px;
+  background: var(--green-Paw);
+  border-radius: 20px;
+  border: none;
+  font-size: 1rem;
+  color: white;
+}
+
+.signup-modal::backdrop{
+  background: rgba(217, 217, 217, 0.56);
+}
+
+.modal-text1{
+  font-weight: 600;
+}
+
+.modal-text1, .modal-text2{
+  margin: 5px 5px;
+}
+
+/* .check-out{
+  width: 40px;
+} */
+/* boton para cerrar*/
+.signup-closeModal{
+  margin: 5px 0px;
+  background-color: var(--blue-Paw);
+  color: white;
+  width: 100px;
+}
+
+.signup-closeModal:hover{
+  background-color: var(--lightblue-Paw);
+  cursor: pointer;
+}
+
+/* Estilo para modal de confirmación */
+.modal-conf{
+  border: none;
+  border-radius: 20px;
+  font-size: 1.15rem;
+}
+
+.modal-conf::backdrop{
+  background: rgba(217, 217, 217, 0.6);
+}
+
+.btn-modalConf-yes, .btn-modalConf-no {
+  font-family: 'Poppins';
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: var(--lightblue-Paw);
+  margin: 0px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 3px 10px;
+}
+
+.btn-modalConf-yes:focus{
+  outline-color: var(--blue-Paw);
+}
+
+.btn-modalConf-no{
+  background-color: var(--gray-Paw);
+}
+
+
+/* Estilo para menú desplegable */
+
+.three-dots{
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+
+  padding-right: 20px;
+}
+
+.dropdown-menu{
+  list-style: none;
+  display: none;
+  position: absolute;
+  width: 130px;
+  background-color: var(--blue-Paw);
+  
+
+  margin-left: 61%;
+  margin-top: 10%;
+  border-radius: 7px;
+  line-height: 2.5;
+  background-color: var(--lightgray-Paw);
+  color: gray;
+
+  padding-left: 0px;
+}
+
+.dropdown-menu li:nth-child(n){
+  padding: 0px 20px;
+}
+
+.dropdown-menu li:nth-child(n):hover{
+  background-color: var(--gray-Paw);
+  color: white;
+  cursor: pointer;
+}
+
+.btn-update-post{
+  display: none;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  background-color: var(--blue-Paw);
+  font-family: 'Poppins';
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 17%;
+}
+
+.btn-update-post:hover{
+  cursor: pointer;
+  background-color: var(--lightblue-Paw);
+}
+
+/* Agregué esto*/
+.picture-desktop{
+  display: none;
+}
+/* hasta acá */
+
+/* media queries */
+@media screen and (min-width: 960px) {
+  .view-login, .view-signup{
+    display: flex;
+    flex-direction: row;
+    gap: 70px;
+  }
+  .picture-desktop{
+    display: block;
+    margin-left: -100px;
+  }
+}
+
+
+
+
+
+
+
+
+
