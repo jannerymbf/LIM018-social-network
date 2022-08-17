@@ -33,7 +33,7 @@ Como usuario deseo salir de la red social.
 
 ## 3. Prototipo de baja fidelidad
 
-![PrototipoBajaFidelidad1](pictures/Prototype.jpg)
+![PrototipoBajaFidelidad1](Prototype.jpg)
 
 ## 4. Prototipo de alta fidelidad
 
