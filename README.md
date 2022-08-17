@@ -33,21 +33,21 @@ Como usuario deseo salir de la red social.
 
 ## 3. Prototipo de baja fidelidad
 
-![PrototipoBajaFidelidad1](para%20readme/Prototype.jpg)
+![PrototipoBajaFidelidad1](Prototype.jpg)
 
 ## 4. Prototipo de alta fidelidad
 
-![PrototipoAltaFidelidad1](para%20readme/Mobile1.png)
+![PrototipoAltaFidelidad1](Mobile1.png)
 
-![PrototipoAltaFidelidad2](para%20readme/Mobile2.png)
+![PrototipoAltaFidelidad2](Mobile2.png)
 
-![PrototipoAltaFidelidad2](para%20readme/Mobile3.png)
+![PrototipoAltaFidelidad2](Mobile3.png)
 
-![PrototipoAltaFidelidad2](para%20readme/Mobile4.png)
+![PrototipoAltaFidelidad2](Mobile4.png)
 
-![PrototipoAltaFidelidad2](para%20readme/Desktop1.png)
+![PrototipoAltaFidelidad2](Desktop1.png)
 
-![PrototipoAltaFidelidad2](para%20readme/Desktop2.png)
+![PrototipoAltaFidelidad2](Desktop2.png)
 
 ## 5. GitHub Pages
 
