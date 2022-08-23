@@ -8,7 +8,7 @@ jest.mock('../src/index.js');
 jest.mock('../src/firebase.js');
 
 describe('testeando la función login()', () => {
-  //estos tests son del boton Login
+  // estos tests son del boton Login
   it('debería mostrar el boton Iniciar Sesión', () => {
     document.body.appendChild(login());
     const btnLogin = document.querySelector('.login-btnLogin');

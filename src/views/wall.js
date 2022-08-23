@@ -18,8 +18,8 @@ export const wall = () => {
     </section>
 
     <section class="post flex">
-      <textarea name="textarea" class="post-editableText" rows="4" cols="10" placeholder="Cuéntanos..."></textarea>
-      <img class="post-btnpost" src="pictures/send.png">
+      <textarea name="textarea" class="post-editableText" rows="4" cols="10" placeholder="¿Qué quieres compartir hoy?"></textarea>
+      <button class="post-btnpost" src="pictures/send.png">Publicar</button>
     </section>
 
     <section class="published-posts">
@@ -79,8 +79,8 @@ export const wall = () => {
     let jornada = hours >= 12 ? 'PM'  : 'AM';
     // hasta acá
 
-    const weekDay = [ 'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
-    const monthYear = [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    const weekDay = [ 'Dom', 'Lun', 'Mar', 'Miér', 'Jue', 'Vie', 'Sáb']
+    const monthYear = [ 'en.', 'feb.', 'mar.', 'abr.', 'may.', 'jun.', 'jul.', 'ago.', 'set.', 'oct.', 'nov.', 'dic.'];
 
     const container = document.createElement('div');
     container.setAttribute('class', 'general-container-post');
@@ -113,7 +113,7 @@ export const wall = () => {
 
     containerName.innerHTML = name;
     containerPost.innerHTML = post;
-    containerDate.innerHTML = `${ weekDay[datePost.toDate().getDay()]}, ${datePost.toDate().getDate()} de ${monthYear[datePost.toDate().getMonth()]} de ${datePost.toDate().getFullYear()}, a las ${hours % 12}:${minutes}   ${jornada}`;
+    containerDate.innerHTML = `${ weekDay[datePost.toDate().getDay()]} ${datePost.toDate().getDate()} ${monthYear[datePost.toDate().getMonth()]} ${datePost.toDate().getFullYear()} ${hours % 12}:${minutes}   ${jornada}`;
     containerNameDate.appendChild(containerName); // **agregue esta línea
     containerNameDate.appendChild(containerDate);
     containerHeadPost.appendChild(containerNameDate);
@@ -288,7 +288,6 @@ export const wall = () => {
       const userId = auth.currentUser.uid;
       const likes = [];
       const likesCounter = 0;
-      console.log(':D :d');
       saveComment(commentPost.value, auth.currentUser.displayName, date, userId, likes, likesCounter)
         .then((result) => {
           //console.log(result.orderBy('date', 'desc'));
@@ -298,7 +297,6 @@ export const wall = () => {
           const commentData = { id: result.id, name: auth.currentUser.displayName, comment: commentPost.value}
           //createDivs(commentData);
           commentPost.value = '';
-          console.log(result);
         });
     }
   });
