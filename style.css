@@ -130,7 +130,7 @@ a{
   width: 40px;
 }
 
-.login-google-img:hover, .post-btnpost:hover, .published-posts-likes-img:hover{
+.login-google-img:hover, .published-posts-likes-img:hover{
   transform: scale(1.2);
   cursor: pointer;
 }
@@ -155,7 +155,7 @@ a{
   gap: 10px;
 }
 
-.logo-img-wall, .post-btnpost, .published-posts-likes-img{
+.logo-img-wall, .published-posts-likes-img{
   height: 30px;
   width: 30px;
   align-self: center;
@@ -177,7 +177,7 @@ a{
 
 .post-editableText{
   /*quité el container-post*/
-  width: 70%;
+  width: 75%;
   height: 30%;
   border-radius: 20px;
   padding: 1rem;
@@ -190,7 +190,19 @@ a{
 
 .post-btnpost{
   align-self: flex-end;
-  margin-right: 15%;
+  margin-right: 12%;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--blue-Paw);
+  color: white;
+  font-family: 'Poppins';
+  font-size: 1rem;
+  padding: 5px 8px;
+}
+
+.post-btnpost:hover{
+  background-color: var(--lightblue-Paw);
+  cursor: pointer;
 }
 
 .general-container-post{
@@ -254,7 +266,7 @@ a{
   margin: 10px;
   font-weight: 700;
   width: 70%;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
 }
 
 .container-post-date{
@@ -380,11 +392,9 @@ a{
   display: none;
   position: absolute;
   width: 130px;
-  background-color: var(--blue-Paw);
   
-
-  margin-left: 61%;
-  margin-top: 10%;
+  right: 13%;
+  top: 35%;
   border-radius: 7px;
   line-height: 2.5;
   background-color: var(--lightgray-Paw);
