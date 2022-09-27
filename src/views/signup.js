@@ -23,7 +23,7 @@ export const signup = () => {
           <div class="signup-errortext"></div>
           <button id="btnSignup" class="signup-btnSignup btn-paw"><a>Registrar</a></button>
           <dialog id="signup-modal" class="signup-modal">
-            <img class="check-out" src="pictures/check.png"></img>
+            <img class="check-out" src="pictures/check.png">
             <p class="modal-text1">¡Usuario registrado <br>con éxito!</p>
             <p class="modal-text2">Revise su correo electrónico para iniciar sesión.</p>
             <button class="signup-closeModal" id="btn-aceptar">Cerrar</button>
